@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mahari Hôtel — Mon Profil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold:        #c9a84c;
+      --gold-lt:     #e8c97a;
+      --navy:        #0f1f3d;
+      --navy-lt:     #1a3060;
+      --sand:        #f5f0e8;
+      --text:        #1a1a2e;
+      --muted:       #6b7280;
+      --white-trans: rgba(255, 255, 255, 0.65);
+      --border:      #ddd5c5;
+    }
+
+    html, body { height: 100%; font-family: 'Jost', sans-serif; color: var(--text); }
+
+    /* ══════════════════════════════════════════
+        BACKGROUND PHOTO & OVERLAY
+       ══════════════════════════════════════════ */
+    body {
+      background-image: url('https://static21.com-hotel.com/uploads/hotel/58490/photo/djerba-holiday-beach_16312596223.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position: relative;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background: rgba(10, 20, 40, 0.4);
+      z-index: -1;
+    }
+
+    /* ══════════════════════════════════════════
+        NAVBAR UNIFORME
+       ══════════════════════════════════════════ */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 66px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 60px;
+      background: var(--navy);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      z-index: 1000;
+    }
+    .navbar::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-lt), var(--gold));
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-icon {
+      width: 36px; height: 36px; background: var(--gold); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--navy); font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700;
+    }
+    .nav-logo-name {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600;
+      color: #fff; letter-spacing: 2px; text-transform: uppercase; line-height: 1;
+    }
+    .nav-logo-sub { font-size: 0.57rem; letter-spacing: 2.5px; color: var(--gold-lt); text-transform: uppercase; margin-top: 2px; }
+
+    .nav-links { display: flex; list-style: none; gap: 40px; align-items: center; }
+    .nav-links li a {
+      color: rgba(255,255,255,.78); text-decoration: none;
+      font-size: 0.72rem; font-weight: 400;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 7px 13px; border-radius: 3px;
+      transition: color .2s, background .2s;
+    }
+    .nav-links li a:hover { color: #fff; background: rgba(255,255,255,.1); }
+    .nav-links li.active a {
+      color: var(--gold-lt);
+      background: rgba(201,168,76,.15);
+      border: 1px solid rgba(201,168,76,.3);
+    }
+
+    /* ══════════════════════════════════════════
+        MAIN CONTENT LAYOUT
+       ══════════════════════════════════════════ */
+    .profile-container {
+      max-width: 1200px;
+      margin: 110px auto 60px;
+      padding: 0 40px;
+      display: flex;
+      gap: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* FROSTED GLASS CARD */
+    .card {
+      background: var(--white-trans);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      padding: 30px;
+    }
+
+    /* ══════════════════════════════════════════
+        SIDEBAR GAUCHE
+       ══════════════════════════════════════════ */
+    .profile-sidebar { flex: 0 0 300px; display: flex; flex-direction: column; gap: 20px; }
+
+    .profile-summary { text-align: center; padding-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,.05); }
+
+    .avatar-wrap {
+      width: 100px; height: 100px;
+      background: var(--navy); color: var(--gold-lt);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700;
+      margin: 0 auto 15px; position: relative;
+    }
+    .avatar-edit {
+      position: absolute; bottom: 0; right: 0;
+      width: 30px; height: 30px; background: var(--gold);
+      border: 2px solid rgba(255,255,255,.5); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--navy); font-size: 0.8rem;
+    }
+
+    .user-name { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+    .user-status { font-size: 0.65rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+    .user-status em { font-style: italic; color: var(--gold); }
+
+    .profile-nav { list-style: none; margin-top: 10px; }
+    .profile-nav li a {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 15px; text-decoration: none;
+      color: var(--text); font-size: 0.85rem; font-weight: 500;
+      border-radius: 4px; transition: all .2s;
+    }
+    .profile-nav li a:hover { background: rgba(255,255,255,.3); color: var(--gold); }
+    .profile-nav li.active a { background: var(--navy); color: #fff; }
+    .profile-nav li.active a svg { fill: var(--gold-lt); }
+    .profile-nav li a svg { width: 18px; height: 18px; fill: var(--muted); transition: all .2s; }
+    .profile-nav li a:hover svg { fill: var(--gold); }
+
+    /* ══════════════════════════════════════════
+        CONTENU PRINCIPAL
+       ══════════════════════════════════════════ */
+    .profile-main { flex: 1; display: flex; flex-direction: column; gap: 30px; }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300;
+      color: var(--navy); margin-bottom: 25px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-group { margin-bottom: 10px; }
+    .form-group label {
+      display: block; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); margin-bottom: 7px;
+    }
+    .form-group input {
+      width: 100%; padding: 12px 16px;
+      background: rgba(255,255,255,.4);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 4px; font-family: 'Jost', sans-serif;
+      font-size: 0.9rem; color: var(--text); transition: all .2s; outline: none;
+    }
+    .form-group input:focus { background: rgba(255,255,255,.8); border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,.1); }
+
+    .btn-save {
+      display: inline-block; padding: 12px 30px;
+      background: var(--navy); color: #fff; border: none; border-radius: 4px;
+      font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+      transition: background .25s; margin-top: 15px;
+    }
+    .btn-save:hover { background: var(--navy-lt); }
+
+    /* Réservations */
+    .reservation-list { list-style: none; display: flex; flex-direction: column; gap: 15px; }
+    .reservation-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px; background: rgba(255,255,255,.3);
+      border: 1px solid rgba(255,255,255,.1); border-radius: 6px; transition: all .2s;
+    }
+    .reservation-item:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,.05); background: rgba(255,255,255,.5); }
+
+    .res-info { display: flex; align-items: center; gap: 15px; }
+    .res-icon {
+      width: 45px; height: 45px; background: rgba(201,168,76,.1);
+      border-radius: 4px; display: flex; align-items: center; justify-content: center;
+    }
+    .res-icon svg { width: 22px; height: 22px; fill: var(--gold); }
+
+    .res-details { display: flex; flex-direction: column; }
+    .res-id { font-size: 0.8rem; color: var(--muted); }
+    .res-room { font-size: 0.95rem; font-weight: 500; color: var(--navy); margin-bottom: 2px; }
+    .res-date { font-size: 0.8rem; color: var(--text); }
+
+    .res-status {
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 1.2px;
+      text-transform: uppercase; padding: 6px 12px; border-radius: 20px;
+    }
+    .res-status.confirmed { background: rgba(22,101,52,.1); color: #166534; }
+
+    @media (max-width: 992px) {
+      .profile-container { flex-direction: column; padding: 0 20px; }
+      .profile-sidebar { flex: 0 0 auto; width: 100%; }
+      .profile-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    }
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .navbar { padding: 0 20px; }
+      .navbar .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">B</div>
+      <div>
+        <div class="nav-logo-name">Mahari Hôtel</div>
+        <div class="nav-logo-sub">Djerba · Tunisie</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="accueil.html">Accueil</a></li>
+      <li><a href="reservation.html">Réservation</a></li>
+      <li class="active"><a href="profil.html">Profil</a></li>
+      <li><a href="registre.html">Registre</a></li>
+      <li><a href="login.html">Connexion</a></li>
+      <li><a href="logout.php">Déconnexion</a></li>
+    </ul>
+  </nav>
+
+  <div class="profile-container">
+
+    <aside class="profile-sidebar">
+      <div class="card profile-summary">
+        <div class="avatar-wrap">
+          S
+          <div class="avatar-edit">✎</div>
+        </div>
+        <h2 class="user-name">Slim Ben Salem</h2>
+        <p class="user-status">Membre <em>Cercle d'Or</em></p>
+      </div>
+
+      <div class="card">
+        <ul class="profile-nav">
+          <li class="active">
+            <a href="#">
+              <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              Mon Profil
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+              Réservations
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+              Sécurité
+            </a>
+          </li>
+          <li>
+            <a href="logout.php">
+              <svg viewBox="0 0 24 24"><path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+              Déconnexion
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="profile-main">
+      <div class="card">
+        <h1 class="section-title">Mes Informations <em>Personnelles</em></h1>
+        <form id="profileForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fullname">Nom complet</label>
+              <input type="text" id="fullname" value="Slim Ben Salem">
+            </div>
+            <div class="form-group">
+              <label for="email">Adresse e-mail</label>
+              <input type="email" id="email" value="slim.bensalem@email.com">
+            </div>
+            <div class="form-group">
+              <label for="phone">Numéro de téléphone</label>
+              <input type="tel" id="phone" value="+216 98 123 456">
+            </div>
+            <div class="form-group">
+              <label for="birthdate">Date de naissance</label>
+              <input type="date" id="birthdate" value="1985-05-15">
+            </div>
+          </div>
+          <button type="submit" class="btn-save">Enregistrer les modifications</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h1 class="section-title">Aperçu de mes <em>Réservations</em></h1>
+        <ul class="reservation-list">
+          <li class="reservation-item">
+            <div class="res-info">
+              <div class="res-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+              </div>
+              <div class="res-details">
+                <span class="res-room">Suite Junior vue Mer</span>
+                <span class="res-date">Du 15 Juin au 22 Juin 2024</span>
+                <span class="res-id">Résa. #EM-54091</span>
+              </div>
+            </div>
+            <span class="res-status confirmed">Confirmée</span>
+          </li>
+        </ul>
+      </div>
+    </main>
+
+  </div>
+
+  <script>
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Modifications enregistrées avec succès !');
+    });
+  </script>
+
+</body>
+</html>

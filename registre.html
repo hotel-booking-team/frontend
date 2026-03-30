@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mahari Hôtel — Créer un compte</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold:    #c9a84c;
+      --gold-lt: #e8c97a;
+      --navy:    #0f1f3d;
+      --navy-lt: #1a3060;
+      --sand:    #f5f0e8;
+      --text:    #1a1a2e;
+      --muted:   #6b7280;
+    }
+
+    html, body { height: 100%; font-family: 'Jost', sans-serif; }
+
+    .page { display: flex; height: 100vh; overflow: hidden; margin-top: 66px; }
+
+    /* ══════════════════════════════════════════
+        NAVBAR UNIFORME
+       ══════════════════════════════════════════ */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 66px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 60px;
+      background: var(--navy);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      z-index: 1000;
+    }
+    .navbar::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-lt), var(--gold));
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-icon {
+      width: 36px; height: 36px; background: var(--gold); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--navy); font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700;
+    }
+    .nav-logo-name {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600;
+      color: #fff; letter-spacing: 2px; text-transform: uppercase; line-height: 1;
+    }
+    .nav-logo-sub { font-size: 0.57rem; letter-spacing: 2.5px; color: var(--gold-lt); text-transform: uppercase; margin-top: 2px; }
+
+    .nav-links { display: flex; list-style: none; gap: 40px; align-items: center; }
+    .nav-links li a {
+      color: rgba(255,255,255,.78); text-decoration: none;
+      font-size: 0.72rem; font-weight: 400;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 7px 13px; border-radius: 3px;
+      transition: color .2s, background .2s;
+    }
+    .nav-links li a:hover { color: #fff; background: rgba(255,255,255,.1); }
+    .nav-links li.active a {
+      color: var(--gold-lt);
+      background: rgba(201,168,76,.15);
+      border: 1px solid rgba(201,168,76,.3);
+    }
+
+    /* ══════════════════════════════════════════
+        PANNEAU GAUCHE — CAROUSEL
+       ══════════════════════════════════════════ */
+    .left-panel { flex: 0 0 60%; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+
+    .slides-wrap { position: relative; flex: 1; overflow: hidden; }
+    .slide {
+      position: absolute; inset: 0; background-size: cover; background-position: center;
+      opacity: 0; transform: scale(1.05); transition: opacity 1.5s ease, transform 7s ease;
+    }
+    .slide.active { opacity: 1; transform: scale(1); }
+    .slide-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to bottom, rgba(10,20,40,.1) 0%, rgba(10,20,40,.05) 45%, rgba(10,20,40,.72) 100%);
+    }
+    .slide-caption { position: absolute; z-index: 2; bottom: 52px; left: 46px; right: 46px; color: #fff; }
+    .caption-tag {
+      display: inline-block; font-size: 0.62rem; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--gold-lt);
+      border: 1px solid rgba(201,168,76,.45); padding: 4px 13px; border-radius: 2px; margin-bottom: 14px;
+    }
+    .caption-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 2.7rem;
+      font-weight: 300; line-height: 1.2; margin-bottom: 12px;
+      text-shadow: 0 2px 30px rgba(0,0,0,.35);
+    }
+    .caption-title em { font-style: italic; color: var(--gold-lt); }
+    .caption-desc { font-size: 0.82rem; color: rgba(255,255,255,.7); line-height: 1.65; max-width: 380px; }
+
+    .slide-dots {
+      position: absolute; z-index: 3; bottom: 22px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 8px;
+    }
+    .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,.35); border: none; cursor: pointer;
+      transition: background .3s, transform .3s; padding: 0;
+    }
+    .dot.active { background: var(--gold); transform: scale(1.55); }
+
+    /* ══════════════════════════════════════════
+        PANNEAU DROIT — FORMULAIRE
+       ══════════════════════════════════════════ */
+    .right-panel {
+      flex: 0 0 40%; min-width: 320px; background: var(--sand);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 40px 46px; position: relative; overflow-y: auto;
+    }
+    .right-panel::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .right-panel::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-lt), var(--gold));
+    }
+
+    .form-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 2.3rem; font-weight: 300;
+      color: var(--navy); line-height: 1.2; margin-bottom: 6px;
+    }
+    .form-title em { font-style: italic; color: var(--gold); }
+    .form-subtitle { font-size: 0.8rem; color: var(--muted); line-height: 1.5; margin-bottom: 28px; }
+
+    .error-msg {
+      background: #fff1f2; border-left: 3px solid #e11d48; color: #be123c;
+      font-size: 0.82rem; padding: 10px 14px; border-radius: 4px; margin-bottom: 18px; display: none;
+    }
+
+    .form-group { margin-bottom: 15px; }
+    .form-group label {
+      display: block; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 1.8px; text-transform: uppercase; color: var(--navy); margin-bottom: 7px;
+    }
+    .form-group input {
+      width: 100%; padding: 12px 16px;
+      background: #fff; border: 1px solid #ddd5c5; border-radius: 4px;
+      font-family: 'Jost', sans-serif; font-size: 0.9rem; color: var(--text);
+      transition: border-color .2s, box-shadow .2s; outline: none;
+    }
+    .form-group input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,.13); }
+
+    .btn-register {
+      width: 100%; padding: 14px;
+      background: var(--navy); color: #fff; border: none; border-radius: 4px;
+      font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 2.5px; text-transform: uppercase; cursor: pointer;
+      transition: background .25s, transform .15s; margin-top: 10px;
+      position: relative; overflow: hidden;
+    }
+    .btn-register::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,.22), transparent);
+      transform: translateX(-100%); transition: transform .55s;
+    }
+    .btn-register:hover { background: var(--navy-lt); }
+    .btn-register:hover::after { transform: translateX(100%); }
+    .btn-register:active { transform: scale(.98); }
+
+    .login-link { text-align: center; font-size: 0.8rem; color: var(--muted); margin-top: 22px; }
+    .login-link a { color: var(--gold); font-weight: 600; text-decoration: none; }
+    .login-link a:hover { text-decoration: underline; }
+
+    @media (max-width: 860px) { .left-panel { display: none; } .right-panel { flex: 1; } }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- PANNEAU GAUCHE -->
+  <div class="left-panel">
+    <nav class="navbar">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">B</div>
+        <div>
+          <div class="nav-logo-name">Mahari Hôtel</div>
+          <div class="nav-logo-sub">Djerba · Tunisie</div>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="accueil.html">Accueil</a></li>
+        <li><a href="reservation.html">Réservation</a></li>
+        <li><a href="profil.html">Profil</a></li>
+        <li class="active"><a href="registre.html">Registre</a></li>
+        <li><a href="login.html">Connexion</a></li>
+        <li><a href="logout.php">Déconnexion</a></li>
+      </ul>
+    </nav>
+
+    <div class="slides-wrap">
+      <div class="slide active" style="background-image:url('https://static21.com-hotel.com/uploads/hotel/58490/photo/djerba-holiday-beach_16312596223.jpeg')"></div>
+      <div class="slide" style="background-image:url('https://www.maisonsdhotesentunisie.com/wp-content/uploads/2023/11/18-Djerba-Dar-Nejma.jpg')"></div>
+      <div class="slide" style="background-image:url('https://www.revigorate.com/images/galerie-fatma-djerba.jpg')"></div>
+      <div class="slide" style="background-image:url('https://admin.touringtravel.tn/uploads/VoyageOrganise/1b81a0dd41fe14e250b7241c8096e99351307d0f.jpeg')"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-caption">
+        <div class="caption-tag" id="captionTag">Privilège</div>
+        <h2 class="caption-title" id="captionTitle">Rejoignez le <em>Cercle</em><br>Mahari</h2>
+        <p class="caption-desc" id="captionDesc">Inscrivez-vous pour bénéficier de tarifs exclusifs et d'attentions personnalisées lors de vos séjours.</p>
+      </div>
+      <div class="slide-dots" id="dots"></div>
+    </div>
+  </div>
+
+  <!-- PANNEAU DROIT -->
+  <div class="right-panel">
+    <h1 class="form-title">Créer un <em>compte.</em></h1>
+    <p class="form-subtitle">Commencez votre voyage avec nous dès aujourd'hui.</p>
+
+    <div id="errorMsg" class="error-msg"></div>
+
+    <form id="registerForm" novalidate>
+      <div class="form-group">
+        <label for="fullname">Nom complet</label>
+        <input type="text" id="fullname" placeholder="Jean Dupont" required autofocus>
+      </div>
+      <div class="form-group">
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email" placeholder="nom@exemple.com" required>
+      </div>
+      <div class="form-group">
+        <label for="tel">Numéro de téléphone</label>
+        <input type="tel" id="tel" placeholder="+216 00 000 000" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" placeholder="••••••••" required>
+      </div>
+      <div class="form-group">
+        <label for="confirm_password">Confirmer le mot de passe</label>
+        <input type="password" id="confirm_password" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn-register">S'inscrire</button>
+    </form>
+
+    <p class="login-link">Déjà membre ? <a href="login.html">Se connecter</a></p>
+  </div>
+
+</div>
+
+<script>
+  const slides   = document.querySelectorAll('.slide');
+  const dotsWrap = document.getElementById('dots');
+  const captions = [
+    { tag:'Privilège', title:'Rejoignez le <em>Cercle</em><br>Mahari', desc:'Inscrivez-vous pour bénéficier de tarifs exclusifs et d\'attentions personnalisées lors de vos séjours.' },
+    { tag:'Sérénité',  title:'Vos réservations<br>en <em>un clic</em>', desc:'Gérez vos dates, vos options et vos préférences depuis votre espace dédié.' },
+    { tag:'Évasion',   title:'Paysages sauvages<br><em>intemporels</em>', desc:'Entre dunes de sable, palmiers et mer translucide, Djerba offre une nature préservée et grandiose.' },
+    { tag:'Culture',   title:'Architecture<br><em>authentique</em>', desc:'Explorez les Houmas traditionnels, les souks colorés et les mosquées centenaires de l\'île enchantée.' },
+  ];
+  let current = 0;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Diapositive ' + (i+1));
+    d.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(d);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsWrap.children[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dotsWrap.children[current].classList.add('active');
+    const c = captions[current];
+    document.getElementById('captionTag').textContent  = c.tag;
+    document.getElementById('captionTitle').innerHTML  = c.title;
+    document.getElementById('captionDesc').textContent = c.desc;
+  }
+  setInterval(() => goTo(current + 1), 5200);
+
+  document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const pass    = document.getElementById('password').value;
+    const confirm = document.getElementById('confirm_password').value;
+    const err     = document.getElementById('errorMsg');
+    if (!document.getElementById('fullname').value.trim() ||
+        !document.getElementById('email').value.trim() ||
+        !document.getElementById('tel').value.trim() || !pass) {
+      err.textContent = 'Veuillez remplir tous les champs.';
+      err.style.display = 'block';
+    } else if (pass !== confirm) {
+      err.textContent = 'Les mots de passe ne correspondent pas.';
+      err.style.display = 'block';
+    } else {
+      err.style.display = 'none';
+      alert('Inscription réussie ! Bienvenue chez Mahari.');
+    }
+  });
+</script>
+</body>
+</html>
