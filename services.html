@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hotel mahari – Nos Services</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <nav class="navbar">
+    <a href="#" class="navbar-brand">
+      <div class="brand-icon">🏨</div>
+      <span>Hotel mahari</span>
+    </a>
+    <ul class="navbar-nav">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Rooms</a></li>
+      <li><a href="#" class="active">Services</a></li>
+      <li><a href="#">My Bookings</a></li>
+      <li><a href="#">Profile</a></li>
+    </ul>
+  </nav>
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">✦ Expérience Exclusive</p>
+      <h1>Nos Services Premium</h1>
+      <p>Du spa relaxant à la gastronomie raffinée, vivez une expérience inoubliable.</p>
+    </div>
+  </section>
+  <div class="page-wrapper">
+    <div class="left-col">
+      <div class="panel">
+        <h2 class="section-title">Nos Services</h2>
+        <div class="services-grid">
+          <div class="service-card" data-service="Spa Treatment" data-price="80">
+            <img class="service-card__img"
+              src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&auto=format&fit=crop&q=60"
+              alt="Spa Treatment" />
+            <div class="service-card__body">
+              <h3 class="service-card__title">Spa Treatment</h3>
+              <p class="service-card__desc">Détendez-vous avec nos soins relaxants et revitalisants.</p>
+              <p class="service-card__price">À partir de 80€ / nuit</p>
+              <button class="btn btn-primary btn-full" data-action="reserve">Reserve</button>
+            </div>
+          </div>
+          <div class="service-card" data-service="Gourmet Dining" data-price="65">
+            <img class="service-card__img"
+              src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&auto=format&fit=crop&q=60"
+              alt="Gourmet Dining" />
+            <div class="service-card__body">
+              <h3 class="service-card__title">Gourmet Dining</h3>
+              <p class="service-card__desc">Savourez des plats fins préparés par nos chefs étoilés.</p>
+              <p class="service-card__price">À partir de 65€ / nuit</p>
+              <button class="btn btn-primary btn-full" data-action="reserve">Reserve</button>
+            </div>
+          </div>
+          <div class="service-card" data-service="Pool &amp; Activities" data-price="45">
+            <img class="service-card__img"
+              src="https://imgs.search.brave.com/X4Zhrqlf3QPep0ZGViAM7Pr-ockFeyiHYE0s7TGZ2B0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ibG9n/LnR3aWRkeS5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjUv/MDkvSjEwOTE3LWtp/ZGRpZXBvb2wyLmpw/Zw"
+              alt="Pool &amp; Activities" />
+            <div class="service-card__body">
+              <h3 class="service-card__title">Pool &amp; Activities</h3>
+              <p class="service-card__desc">Profitez de notre piscine et d'activités sportives variées.</p>
+              <p class="service-card__price">À partir de 45€ / nuit</p>
+              <button class="btn btn-primary btn-full" data-action="reserve">Reserve</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="panel">
+        <h2 class="section-title">Mes Réservations</h2>
+        <div id="bookings-list">
+        </div>
+      </div>
+
+    </div>
+    <div class="panel reservation-panel">
+      <h2 class="form-title">Réservation de Service</h2>
+
+      <form id="reservationForm" novalidate>
+
+        <div class="form-group">
+          <label class="form-label" for="serviceSelect">Sélectionner un Service</label>
+          <div class="form-select-wrap">
+            <select id="serviceSelect" class="form-control" required>
+              <option value="" disabled selected>Choisir un service...</option>
+              <option value="Spa Treatment" data-price="80">Spa Treatment — 80€ / nuit</option>
+              <option value="Gourmet Dining" data-price="65">Gourmet Dining — 65€ / nuit</option>
+              <option value="Pool &amp; Activities" data-price="45">Pool &amp; Activities — 45€ / nuit</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="checkIn">Date d'arrivée</label>
+          <div class="form-icon-wrap">
+            <input type="date" id="checkIn" class="form-control" required />
+            <span class="form-icon">📅</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="checkOut">Date de départ</label>
+          <div class="form-icon-wrap">
+            <input type="date" id="checkOut" class="form-control" required />
+            <span class="form-icon">📅</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="guests">Nombre de personnes</label>
+          <input type="number" id="guests" class="form-control" min="1" max="10" value="1" />
+        </div>
+        <div class="price-summary" id="priceSummary">
+          <div class="price-row">
+            <span id="summaryService">Service</span>
+            <span id="summaryRate">—</span>
+          </div>
+          <div class="price-row">
+            <span>Nombre de nuits</span>
+            <span id="summaryNights">—</span>
+          </div>
+          <div class="price-row price-row--total">
+            <span>Total estimé</span>
+            <span id="summaryTotal" class="price-value">—</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full">Confirmer la Réservation</button>
+
+      </form>
+    </div>
+
+  </div>
+  <footer class="footer">
+    <strong>Hotel Luxe</strong> © 2024 Tous droits réservés– Services
+  </footer>
+  <div class="toast" id="toast"></div>
+
+  <script src="services.js"></script>
+
+</body>
+
+</html>
