@@ -1,148 +1,129 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hotel mahari – Nos Services</title>
-  <link rel="stylesheet" href="services.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahari Hôtel — Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="services.css">
 </head>
-
 <body>
-  <nav class="navbar">
-    <a href="#" class="navbar-brand">
-      <div class="brand-icon">🏨</div>
-      <span>Hotel mahari</span>
-    </a>
-    <ul class="navbar-nav">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Rooms</a></li>
-      <li><a href="#" class="active">Services</a></li>
-      <li><a href="#">My Bookings</a></li>
-      <li><a href="#">Profile</a></li>
-    </ul>
-  </nav>
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">✦ Expérience Exclusive</p>
-      <h1>Nos Services Premium</h1>
-      <p>Du spa relaxant à la gastronomie raffinée, vivez une expérience inoubliable.</p>
-    </div>
-  </section>
-  <div class="page-wrapper">
-    <div class="left-col">
-      <div class="panel">
-        <h2 class="section-title">Nos Services</h2>
-        <div class="services-grid">
-          <div class="service-card" data-service="Spa Treatment" data-price="80">
-            <img class="service-card__img"
-              src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&auto=format&fit=crop&q=60"
-              alt="Spa Treatment" />
-            <div class="service-card__body">
-              <h3 class="service-card__title">Spa Treatment</h3>
-              <p class="service-card__desc">Détendez-vous avec nos soins relaxants et revitalisants.</p>
-              <p class="service-card__price">À partir de 80€ / nuit</p>
-              <button class="btn btn-primary btn-full" data-action="reserve">Reserve</button>
+    <nav class="navbar">
+        <a href="accueil.php" class="nav-logo">
+            <div class="nav-logo-icon">M</div>
+            <div>
+                <div class="nav-logo-name">Mahari Hôtel</div>
+                <div class="nav-logo-sub">Djerba · Tunisie</div>
             </div>
-          </div>
-          <div class="service-card" data-service="Gourmet Dining" data-price="65">
-            <img class="service-card__img"
-              src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&auto=format&fit=crop&q=60"
-              alt="Gourmet Dining" />
-            <div class="service-card__body">
-              <h3 class="service-card__title">Gourmet Dining</h3>
-              <p class="service-card__desc">Savourez des plats fins préparés par nos chefs étoilés.</p>
-              <p class="service-card__price">À partir de 65€ / nuit</p>
-              <button class="btn btn-primary btn-full" data-action="reserve">Reserve</button>
-            </div>
-          </div>
-          <div class="service-card" data-service="Pool &amp; Activities" data-price="45">
-            <img class="service-card__img"
-              src="https://imgs.search.brave.com/X4Zhrqlf3QPep0ZGViAM7Pr-ockFeyiHYE0s7TGZ2B0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ibG9n/LnR3aWRkeS5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjUv/MDkvSjEwOTE3LWtp/ZGRpZXBvb2wyLmpw/Zw"
-              alt="Pool &amp; Activities" />
-            <div class="service-card__body">
-              <h3 class="service-card__title">Pool &amp; Activities</h3>
-              <p class="service-card__desc">Profitez de notre piscine et d'activités sportives variées.</p>
-              <p class="service-card__price">À partir de 45€ / nuit</p>
-              <button class="btn btn-primary btn-full" data-action="reserve">Reserve</button>
-            </div>
-          </div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="accueil.html">Accueil</a></li>
+            <li><a href="reservation.html">Réservation</a></li>
+            <li><a href="chambres.html">Chambres</a></li>
+            <li class="active"><a href="services.html">Services</a></li>
+            <li><a href="profil.html">Profil</a></li>
+            <?php if (!$isLoggedIn): ?>
+                <li><a href="login.html">Connexion</a></li>
+            <?php else: ?>
+                <li><a href="logout.html">Déconnexion</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
 
+    <div class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-tag">Bien-être & Évasion</div>
+            <h1>Services & <em>excellence</em></h1>
+            <p>Réservez vos moments de détente et de plaisir gastronomique</p>
         </div>
-      </div>
-      <div class="panel">
-        <h2 class="section-title">Mes Réservations</h2>
-        <div id="bookings-list">
-        </div>
-      </div>
-
-    </div>
-    <div class="panel reservation-panel">
-      <h2 class="form-title">Réservation de Service</h2>
-
-      <form id="reservationForm" novalidate>
-
-        <div class="form-group">
-          <label class="form-label" for="serviceSelect">Sélectionner un Service</label>
-          <div class="form-select-wrap">
-            <select id="serviceSelect" class="form-control" required>
-              <option value="" disabled selected>Choisir un service...</option>
-              <option value="Spa Treatment" data-price="80">Spa Treatment — 80€ / nuit</option>
-              <option value="Gourmet Dining" data-price="65">Gourmet Dining — 65€ / nuit</option>
-              <option value="Pool &amp; Activities" data-price="45">Pool &amp; Activities — 45€ / nuit</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="checkIn">Date d'arrivée</label>
-          <div class="form-icon-wrap">
-            <input type="date" id="checkIn" class="form-control" required />
-            <span class="form-icon">📅</span>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="checkOut">Date de départ</label>
-          <div class="form-icon-wrap">
-            <input type="date" id="checkOut" class="form-control" required />
-            <span class="form-icon">📅</span>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="guests">Nombre de personnes</label>
-          <input type="number" id="guests" class="form-control" min="1" max="10" value="1" />
-        </div>
-        <div class="price-summary" id="priceSummary">
-          <div class="price-row">
-            <span id="summaryService">Service</span>
-            <span id="summaryRate">—</span>
-          </div>
-          <div class="price-row">
-            <span>Nombre de nuits</span>
-            <span id="summaryNights">—</span>
-          </div>
-          <div class="price-row price-row--total">
-            <span>Total estimé</span>
-            <span id="summaryTotal" class="price-value">—</span>
-          </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-full">Confirmer la Réservation</button>
-
-      </form>
     </div>
 
-  </div>
-  <footer class="footer">
-    <strong>Hotel Luxe</strong> © 2024 Tous droits réservés– Services
-  </footer>
-  <div class="toast" id="toast"></div>
+    <div class="filter-sticky">
+        <div class="filter-inner">
+            <span class="filter-label">Type</span>
+            <button type="button" class="filter-btn active" data-filter="all">Tous</button>
+            <button type="button" class="filter-btn" data-filter="spa">Spa</button>
+            <button type="button" class="filter-btn" data-filter="restaurant">Restaurant</button>
+            <button type="button" class="filter-btn" data-filter="piscine">Piscine</button>
+            <button type="button" class="filter-btn" data-filter="excursion">Excursions</button>
+        </div>
+    </div>
 
-  <script src="services.js"></script>
+    <div class="page-body">
+        <div class="main-col">
+            <p class="results-label"><strong id="catalogCount">0</strong> prestation(s) disponible(s)</p>
+            <div id="services-catalog" class="services-catalog"></div>
 
+            <section class="panel bookings-panel">
+                <h2 class="section-heading">Mes réservations</h2>
+                <div id="bookings-list" class="bookings-list"></div>
+            </section>
+        </div>
+
+        <aside class="sidebar">
+            <div class="panel form-panel">
+                <h2 class="form-title">Réserver un service</h2>
+                <form id="serviceReservationForm">
+                    <div class="form-group">
+                        <label class="form-label" for="serviceSelect">Prestation</label>
+                        <select id="serviceSelect" class="form-control" required>
+                            <option value="">Choisir une prestation...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="dateService">Date</label>
+                        <input type="date" id="dateService" class="form-control" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="heureDebut">Heure début</label>
+                            <input type="time" id="heureDebut" class="form-control" value="10:00" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="heureFin">Heure fin</label>
+                            <input type="time" id="heureFin" class="form-control" value="12:00" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="participants">Nombre de personnes</label>
+                        <input type="number" id="participants" class="form-control" min="1" max="20" value="1" required>
+                    </div>
+
+                    <div id="priceSummary" class="price-summary" style="display:none;">
+                        <div class="price-row">
+                            <span>Prestation</span>
+                            <span id="summaryService">—</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Durée</span>
+                            <span id="summaryDuration">—</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Participants</span>
+                            <span id="summaryParticipants">—</span>
+                        </div>
+                        <div class="price-row price-row--total">
+                            <span>Total</span>
+                            <span id="summaryTotal" class="price-value">—</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">Réserver</button>
+                </form>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="site-footer">
+        <strong>Mahari Hôtel</strong> · Services de luxe · © 2026
+    </footer>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="services.js"></script>
 </body>
-
 </html>
