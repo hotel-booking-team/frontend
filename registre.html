@@ -220,26 +220,30 @@
 
     <div id="errorMsg" class="error-msg"></div>
 
-    <form id="registerForm" novalidate>
+    <form id="registerForm" method="post" action="registre.php">
       <div class="form-group">
-        <label for="fullname">Nom complet</label>
-        <input type="text" id="fullname" placeholder="Jean Dupont" required autofocus>
+        <label for="fullname">Prenom</label>
+        <input type="text" id="name" name="prenom" placeholder="Jean " required autofocus>
+      </div>
+           <div class="form-group">
+        <label for="fullname">Nom</label>
+        <input type="text" id="name" name="nom" placeholder="Jean " required autofocus>
       </div>
       <div class="form-group">
         <label for="email">Adresse e-mail</label>
-        <input type="email" id="email" placeholder="nom@exemple.com" required>
+        <input type="email" id="email" name="email"  placeholder="nom@exemple.com" required>
       </div>
       <div class="form-group">
         <label for="tel">Numéro de téléphone</label>
-        <input type="tel" id="tel" placeholder="+216 00 000 000" required>
+        <input type="tel" id="telphone" name="telephone" placeholder="+216 00 000 000" required>
       </div>
       <div class="form-group">
         <label for="password">Mot de passe</label>
-        <input type="password" id="password" placeholder="••••••••" required>
+        <input type="password" id="password"name="password"  placeholder="••••••••" required>
       </div>
       <div class="form-group">
         <label for="confirm_password">Confirmer le mot de passe</label>
-        <input type="password" id="confirm_password" placeholder="••••••••" required>
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="••••••••" required>
       </div>
       <button type="submit" class="btn-register">S'inscrire</button>
     </form>
@@ -282,23 +286,29 @@
   setInterval(() => goTo(current + 1), 5200);
 
   document.getElementById('registerForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const pass    = document.getElementById('password').value;
-    const confirm = document.getElementById('confirm_password').value;
-    const err     = document.getElementById('errorMsg');
-    if (!document.getElementById('fullname').value.trim() ||
-        !document.getElementById('email').value.trim() ||
-        !document.getElementById('tel').value.trim() || !pass) {
-      err.textContent = 'Veuillez remplir tous les champs.';
-      err.style.display = 'block';
-    } else if (pass !== confirm) {
-      err.textContent = 'Les mots de passe ne correspondent pas.';
-      err.style.display = 'block';
-    } else {
-      err.style.display = 'none';
-      alert('Inscription réussie ! Bienvenue chez Mahari.');
-    }
-  });
+  const pass    = document.getElementById('password').value;
+  const confirm = document.getElementById('confirm_password').value;
+  const err     = document.getElementById('errorMsg');
+
+  // Vérifier nom
+  const nom    = document.getElementById('nom').value.trim();
+  const prenom = document.getElementById('prenom').value.trim();
+  const email  = document.getElementById('email').value.trim();
+  const phone  = document.getElementById('telephone').value.trim();
+
+  if (!nom || !prenom || !email || !phone || !pass) {
+    e.preventDefault();                          // bloquer seulement si erreur
+    err.textContent = 'Veuillez remplir tous les champs.';
+    err.style.display = 'block';
+  } else if (pass !== confirm) {
+    e.preventDefault();                          // bloquer seulement si erreur
+    err.textContent = 'Les mots de passe ne correspondent pas.';
+    err.style.display = 'block';
+  } else {
+    err.style.display = 'none';
+    // Laisser le formulaire s'envoyer normalement vers registre.php
+  }
+});
 </script>
 </body>
 </html>
