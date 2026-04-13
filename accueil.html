@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mahari Hôtel — Accueil</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #c9a84c;
+            --gold-lt: #e8c97a;
+            --navy: #0f1f3d;
+            --navy-lt: #1a3060;
+            --sand: #f5f0e8;
+            --text: #1a1a2e;
+            --muted: #6b7280;
+            --border: #ddd5c5;
+            --white: #ffffff;
+        }
+
+        html,
+        body {
+            font-family: 'Jost', sans-serif;
+            color: var(--text);
+            background: var(--sand);
+        }
+
+        /* NAVBAR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 66px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 60px;
+            background: var(--navy);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-lt), var(--gold));
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .nav-logo-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .nav-logo-sub {
+            font-size: 0.57rem;
+            letter-spacing: 2.5px;
+            color: var(--gold-lt);
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links li a {
+            color: rgba(255, 255, 255, .78);
+            text-decoration: none;
+            font-size: 0.72rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 7px 13px;
+            border-radius: 3px;
+            transition: color .2s, background .2s;
+        }
+
+        .nav-links li a:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, .1);
+        }
+
+        .nav-links li.active a {
+            color: var(--gold-lt);
+            background: rgba(201, 168, 76, .15);
+            border: 1px solid rgba(201, 168, 76, .3);
+        }
+
+        /* HERO */
+        .hero {
+            margin-top: 66px;
+            min-height: 74vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 70px 60px;
+            background-image:
+                linear-gradient(100deg, rgba(10, 20, 40, .78) 0%, rgba(10, 20, 40, .45) 52%, rgba(10, 20, 40, .25) 100%),
+                url('https://apiimg.iberostar.com/uploads/image/85106/crops/16:9/1920/image.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            font-size: 0.62rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold-lt);
+            border: 1px solid rgba(201, 168, 76, .45);
+            padding: 4px 13px;
+            border-radius: 2px;
+            margin-bottom: 14px;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            font-weight: 300;
+            line-height: 1.15;
+            margin-bottom: 14px;
+            text-shadow: 0 2px 30px rgba(0, 0, 0, .35);
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--gold-lt);
+        }
+
+        .hero p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, .82);
+            line-height: 1.75;
+            max-width: 560px;
+            margin-bottom: 26px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: .25s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--navy);
+            box-shadow: 0 4px 15px rgba(201, 168, 76, .35);
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-lt);
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            color: #fff;
+            border-color: rgba(255, 255, 255, .4);
+            background: rgba(255, 255, 255, .08);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, .16);
+        }
+
+        /* MAIN */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 48px 28px 24px;
+        }
+
+        .section-head {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .section-head .tag {
+            display: inline-block;
+            font-size: 0.62rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .section-head h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 400;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+
+        .section-head p {
+            color: var(--muted);
+            font-size: 0.9rem;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(220px, 1fr));
+            gap: 18px;
+            margin-bottom: 44px;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(15, 31, 61, .06);
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 28px rgba(15, 31, 61, .12);
+        }
+
+        .card img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-body {
+            padding: 18px;
+        }
+
+        .card-title {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--navy);
+            font-size: 1.45rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .card-text {
+            color: var(--muted);
+            font-size: .85rem;
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
+
+        .card-link {
+            text-decoration: none;
+            font-size: .74rem;
+            font-weight: 600;
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .auth-band {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-lt) 100%);
+            color: #fff;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, .1);
+            padding: 28px;
+            margin-bottom: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .auth-band h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 6px;
+        }
+
+        .auth-band h3 em {
+            color: var(--gold-lt);
+            font-style: italic;
+        }
+
+        .auth-band p {
+            color: rgba(255, 255, 255, .75);
+            font-size: .86rem;
+            max-width: 560px;
+        }
+
+        .auth-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .quick {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 18px;
+        }
+
+        .quick h4 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--navy);
+            font-size: 1.35rem;
+            margin-bottom: 6px;
+        }
+
+        .quick p {
+            color: var(--muted);
+            font-size: .84rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            background: var(--navy);
+            color: rgba(255, 255, 255, .65);
+            text-align: center;
+            padding: 20px;
+            font-size: .8rem;
+            margin-top: 10px;
+        }
+
+        .footer strong {
+            color: var(--gold-lt);
+        }
+
+        @media (max-width: 980px) {
+            .navbar {
+                padding: 0 22px;
+            }
+
+            .hero {
+                padding: 50px 24px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .cards,
+            .quick-links {
+                grid-template-columns: repeat(2, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 760px) {
+            .nav-links {
+                display: none;
+            }
+
+            .cards,
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+
+            .main {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .auth-band {
+                padding: 22px;
+            }
+
+            .auth-band h3 {
+                font-size: 1.65rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="accueil.html" class="nav-logo">
+            <div class="nav-logo-icon">M</div>
+            <div>
+                <div class="nav-logo-name">Mahari Hôtel</div>
+                <div class="nav-logo-sub">Djerba · Tunisie</div>
+            </div>
+        </a>
+        <ul class="nav-links">
+            <li class="active"><a href="accueil.html">Accueil</a></li>
+            <li data-show-logged-in><a href="reservation.html">Réservation</a></li>
+            <li data-show-logged-in><a href="carte-chambres.html">Chambres</a></li>
+            <li data-show-logged-in><a href="services.html">Services</a></li>
+            <li data-show-logged-in><a href="profil.html">Profil</a></li>
+            <li><a href="registre.html">Registre</a></li>
+            <li data-show-logged-out><a href="login.html">Connexion</a></li>
+            <li data-show-logged-in><a href="#" data-logout="true">Déconnexion</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">Ile aux sables d'or</span>
+            <h1>Bienvenue au <em>Mahari Hôtel</em><br>votre escapade à Djerba</h1>
+            <p>
+                Entre plage, jardins et expériences sur mesure, découvrez un séjour pensé pour
+                toute la famille. Réservez votre chambre, explorez nos services et gérez vos réservations facilement.
+            </p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="reservation.html">Réserver maintenant</a>
+                <a class="btn btn-ghost" href="carte-chambres.html">Voir les chambres</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="section-head">
+            <span class="tag">Expériences</span>
+            <h2>Un séjour complet, du confort au bien-être</h2>
+            <p>Une sélection de moments forts inspirés du cadre hôtelier de Djerba pour une page d’accueil élégante et
+                cohérente avec ton site.</p>
+        </section>
+
+        <section class="cards" aria-label="Aperçu des expériences">
+            <article class="card">
+                <img src="https://apiimg.iberostar.com/uploads/image/82845/crops/1:1/600/image.jpeg"
+                    alt="Bar et restaurant">
+                <div class="card-body">
+                    <h3 class="card-title">Gastronomie</h3>
+                    <p class="card-text">Savourez une cuisine locale et internationale dans une ambiance raffinée.</p>
+                    <a class="card-link" href="services.html">Découvrir les services →</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://apiimg.iberostar.com/uploads/image/87233/crops/1:1/600/image.jpeg"
+                    alt="Chambre d'hôtel">
+                <div class="card-body">
+                    <h3 class="card-title">Chambres</h3>
+                    <p class="card-text">Des chambres lumineuses et confortables adaptées à tous les types de séjour.
+                    </p>
+                    <a class="card-link" href="carte-chambres.html">Choisir une chambre →</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://apiimg.iberostar.com/uploads/image/43763/crops/1:1/600/image.jpeg"
+                    alt="Piscine et activités">
+                <div class="card-body">
+                    <h3 class="card-title">Loisirs & détente</h3>
+                    <p class="card-text">Piscine, activités familles, bien-être et moments de détente en toute sérénité.
+                    </p>
+                    <a class="card-link" href="reservation.html">Planifier votre séjour →</a>
+                </div>
+            </article>
+        </section>
+
+        <section class="auth-band" aria-label="Accès compte utilisateur">
+            <div>
+                <h3>Déjà membre ? <em>Connectez-vous.</em></h3>
+                <p>Accédez à votre espace personnel pour consulter vos informations, gérer vos réservations et profiter
+                    d’une expérience personnalisée.</p>
+            </div>
+            <div class="auth-actions">
+                <a class="btn btn-primary" href="login.html">Connexion</a>
+                <a class="btn btn-ghost" href="registre.html">Créer un compte</a>
+            </div>
+        </section>
+
+        <section class="quick-links" aria-label="Raccourcis utiles">
+            <article class="quick">
+                <h4>Mes réservations</h4>
+                <p>Suivez et mettez à jour facilement vos réservations en un seul endroit.</p>
+                <a class="card-link" href="profil.html">Accéder au profil →</a>
+            </article>
+            <article class="quick">
+                <h4>Réserver une chambre</h4>
+                <p>Consultez les disponibilités et confirmez votre séjour en quelques clics.</p>
+                <a class="card-link" href="reservation.html">Nouvelle réservation →</a>
+            </article>
+            <article class="quick">
+                <h4>Services de l’hôtel</h4>
+                <p>Explorez les options premium : restauration, loisirs, sport et bien-être.</p>
+                <a class="card-link" href="services.html">Voir tous les services →</a>
+            </article>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <strong>Mahari Hôtel</strong> © <span id="year"></span> · Tous droits réservés
+    </footer>
+
+    <script src="auth.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        document.querySelectorAll('a[data-logout="true"]').forEach((link) => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.MahariAuth.logout('accueil.html');
+            });
+        });
+    </script>
+</body>
+
+</html>

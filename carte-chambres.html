@@ -1,907 +1,1612 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mahari Hôtel — Nos Chambres</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --gold:    #c9a84c;
-      --gold-lt: #e8c97a;
-      --navy:    #0f1f3d;
-      --navy-lt: #1a3060;
-      --sand:    #f5f0e8;
-      --text:    #1a1a2e;
-      --muted:   #6b7280;
-      --border:  #ddd5c5;
-      --white:   #ffffff;
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Jost', sans-serif; color: var(--text); background: #f7f4ef; }
+    :root {
+      --gold: #c9a84c;
+      --gold-lt: #e8c97a;
+      --navy: #0f1f3d;
+      --navy-lt: #1a3060;
+      --sand: #f5f0e8;
+      --text: #1a1a2e;
+      --muted: #6b7280;
+      --border: #ddd5c5;
+      --white: #ffffff;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      color: var(--text);
+      background: #f7f4ef;
+    }
 
     /* ══ NAVBAR ══ */
     .navbar {
-      position: fixed; top: 0; left: 0; width: 100%; height: 66px;
-      display: flex; align-items: center; justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 0 60px;
       background: var(--navy);
-      box-shadow: 0 2px 10px rgba(0,0,0,.2);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
       z-index: 1000;
     }
+
     .navbar::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
       background: linear-gradient(90deg, var(--gold), var(--gold-lt), var(--gold));
     }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
     .nav-logo-icon {
-      width: 36px; height: 36px; background: var(--gold); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--navy); font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700;
+      width: 36px;
+      height: 36px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
     }
+
     .nav-logo-name {
-      font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600;
-      color: #fff; letter-spacing: 2px; text-transform: uppercase; line-height: 1;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      line-height: 1;
     }
-    .nav-logo-sub { font-size: .57rem; letter-spacing: 2.5px; color: var(--gold-lt); text-transform: uppercase; margin-top: 2px; }
-    .nav-links { display: flex; list-style: none; gap: 36px; align-items: center; }
+
+    .nav-logo-sub {
+      font-size: .57rem;
+      letter-spacing: 2.5px;
+      color: var(--gold-lt);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 36px;
+      align-items: center;
+    }
+
     .nav-links li a {
-      color: rgba(255,255,255,.78); text-decoration: none;
-      font-size: .72rem; font-weight: 400; letter-spacing: 1px; text-transform: uppercase;
-      padding: 7px 13px; border-radius: 3px; transition: color .2s, background .2s;
+      color: rgba(255, 255, 255, .78);
+      text-decoration: none;
+      font-size: .72rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 7px 13px;
+      border-radius: 3px;
+      transition: color .2s, background .2s;
     }
-    .nav-links li a:hover { color: #fff; background: rgba(255,255,255,.1); }
+
+    .nav-links li a:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, .1);
+    }
+
     .nav-links li.active a {
-      color: var(--gold-lt); background: rgba(201,168,76,.15);
-      border: 1px solid rgba(201,168,76,.3);
+      color: var(--gold-lt);
+      background: rgba(201, 168, 76, .15);
+      border: 1px solid rgba(201, 168, 76, .3);
     }
 
     /* ══ HERO ══ */
     .hero {
-      margin-top: 66px; height: 360px; position: relative; overflow: hidden;
+      margin-top: 66px;
+      height: 360px;
+      position: relative;
+      overflow: hidden;
       background: var(--navy);
     }
-    .hero-slides { position: absolute; inset: 0; }
+
+    .hero-slides {
+      position: absolute;
+      inset: 0;
+    }
+
     .hero-slide {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center;
-      opacity: 0; transition: opacity 1.4s ease;
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.4s ease;
     }
-    .hero-slide.active { opacity: 1; }
+
+    .hero-slide.active {
+      opacity: 1;
+    }
+
     .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(15,31,61,.2) 0%, rgba(15,31,61,.7) 100%);
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(15, 31, 61, .2) 0%, rgba(15, 31, 61, .7) 100%);
     }
+
     .hero-content {
-      position: relative; z-index: 1; height: 100%;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 0 20px;
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
     }
+
     .hero-tag {
-      display: inline-block; font-size: .62rem; letter-spacing: 4px;
-      text-transform: uppercase; color: var(--gold-lt);
-      border: 1px solid rgba(201,168,76,.5);
-      padding: 4px 14px; border-radius: 2px; margin-bottom: 16px;
+      display: inline-block;
+      font-size: .62rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      border: 1px solid rgba(201, 168, 76, .5);
+      padding: 4px 14px;
+      border-radius: 2px;
+      margin-bottom: 16px;
     }
+
     .hero-content h1 {
-      font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 300;
-      color: #fff; line-height: 1.15; margin-bottom: 12px;
-      text-shadow: 0 2px 30px rgba(0,0,0,.4);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem;
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 30px rgba(0, 0, 0, .4);
     }
-    .hero-content h1 em { font-style: italic; color: var(--gold-lt); }
-    .hero-content p { font-size: .88rem; color: rgba(255,255,255,.75); max-width: 520px; }
+
+    .hero-content h1 em {
+      font-style: italic;
+      color: var(--gold-lt);
+    }
+
+    .hero-content p {
+      font-size: .88rem;
+      color: rgba(255, 255, 255, .75);
+      max-width: 520px;
+    }
 
     /* ══ STICKY FILTER BAR ══ */
     .filter-sticky {
-      position: sticky; top: 66px; z-index: 900;
-      background: var(--white); border-bottom: 1px solid var(--border);
-      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+      position: sticky;
+      top: 66px;
+      z-index: 900;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .06);
     }
+
     .filter-inner {
-      max-width: 1280px; margin: 0 auto; padding: 0 48px;
-      display: flex; align-items: center; gap: 6px; height: 54px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      height: 54px;
       overflow-x: auto;
     }
-    .filter-inner::-webkit-scrollbar { display: none; }
+
+    .filter-inner::-webkit-scrollbar {
+      display: none;
+    }
+
     .filter-label {
-      font-size: .65rem; font-weight: 600; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--muted); margin-right: 8px; flex-shrink: 0;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-right: 8px;
+      flex-shrink: 0;
     }
+
     .filter-btn {
-      flex-shrink: 0; padding: 6px 16px;
-      background: none; border: 1px solid var(--border); border-radius: 30px;
-      color: var(--muted); font-family: 'Jost', sans-serif;
-      font-size: .72rem; font-weight: 500; cursor: pointer;
-      transition: all .2s; white-space: nowrap;
+      flex-shrink: 0;
+      padding: 6px 16px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      color: var(--muted);
+      font-family: 'Jost', sans-serif;
+      font-size: .72rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .2s;
+      white-space: nowrap;
     }
-    .filter-btn:hover { border-color: var(--navy); color: var(--navy); }
-    .filter-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+    .filter-btn:hover {
+      border-color: var(--navy);
+      color: var(--navy);
+    }
+
+    .filter-btn.active {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+    }
 
     /* ══ LAYOUT ══ */
     .page-body {
-      max-width: 1280px; margin: 0 auto; padding: 24px 48px 80px;
-      display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 48px 80px;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 28px;
+      align-items: start;
     }
 
     /* ══ RESULTS COUNT ══ */
     .results-label {
-      font-size: .78rem; color: var(--muted); margin-bottom: 16px;
+      font-size: .78rem;
+      color: var(--muted);
+      margin-bottom: 16px;
     }
-    .results-label strong { color: var(--navy); font-weight: 600; }
+
+    .results-label strong {
+      color: var(--navy);
+      font-weight: 600;
+    }
 
     /* ══ ROOM ROW — Agoda style ══ */
     .room-row {
-      background: var(--white); border-radius: 10px;
+      background: var(--white);
+      border-radius: 10px;
       border: 1px solid var(--border);
-      box-shadow: 0 2px 16px rgba(0,0,0,.06);
-      margin-bottom: 18px; overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, .06);
+      margin-bottom: 18px;
+      overflow: hidden;
       display: flex;
       transition: box-shadow .3s ease;
       animation: fadeUp .5s ease both;
     }
-    .room-row:hover { box-shadow: 0 6px 32px rgba(0,0,0,.12); }
-    .room-row.hidden { display: none; }
+
+    .room-row:hover {
+      box-shadow: 0 6px 32px rgba(0, 0, 0, .12);
+    }
+
+    .room-row.hidden {
+      display: none;
+    }
 
     /* GALLERY */
     .room-gallery {
-      flex: 0 0 400px; position: relative;
-      background: #111827; overflow: hidden;
+      flex: 0 0 400px;
+      position: relative;
+      background: #111827;
+      overflow: hidden;
     }
+
     .gallery-main {
-      width: 100%; height: 100%; min-height: 290px;
+      width: 100%;
+      height: 100%;
+      min-height: 290px;
       position: relative;
     }
+
     .gallery-main img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      position: absolute; inset: 0; opacity: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      position: absolute;
+      inset: 0;
+      opacity: 0;
       transition: opacity .4s ease;
     }
-    .gallery-main img.active { opacity: 1; position: relative; }
+
+    .gallery-main img.active {
+      opacity: 1;
+      position: relative;
+    }
 
     /* thumbnails */
     .gallery-thumbs {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      display: flex; gap: 3px; padding: 4px;
-      background: rgba(0,0,0,.55); overflow-x: auto;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      gap: 3px;
+      padding: 4px;
+      background: rgba(0, 0, 0, .55);
+      overflow-x: auto;
     }
-    .gallery-thumbs::-webkit-scrollbar { height: 3px; }
-    .gallery-thumbs::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+    .gallery-thumbs::-webkit-scrollbar {
+      height: 3px;
+    }
+
+    .gallery-thumbs::-webkit-scrollbar-thumb {
+      background: var(--gold);
+      border-radius: 2px;
+    }
+
     .g-thumb {
-      flex-shrink: 0; width: 52px; height: 38px; object-fit: cover;
-      cursor: pointer; border-radius: 2px;
-      border: 2px solid transparent; opacity: .55;
+      flex-shrink: 0;
+      width: 52px;
+      height: 38px;
+      object-fit: cover;
+      cursor: pointer;
+      border-radius: 2px;
+      border: 2px solid transparent;
+      opacity: .55;
       transition: border-color .2s, opacity .2s;
     }
-    .g-thumb.active { border-color: var(--gold); opacity: 1; }
-    .g-thumb:hover { opacity: .85; }
+
+    .g-thumb.active {
+      border-color: var(--gold);
+      opacity: 1;
+    }
+
+    .g-thumb:hover {
+      opacity: .85;
+    }
 
     /* nav arrows */
     .g-arrow {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      width: 32px; height: 32px;
-      background: rgba(255,255,255,.88); border: none; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; font-size: .95rem; color: var(--navy);
-      box-shadow: 0 2px 8px rgba(0,0,0,.2);
-      transition: background .2s; z-index: 2; line-height: 1;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, .88);
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: .95rem;
+      color: var(--navy);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+      transition: background .2s;
+      z-index: 2;
+      line-height: 1;
     }
-    .g-arrow:hover { background: #fff; }
-    .g-arrow.prev { left: 9px; }
-    .g-arrow.next { right: 9px; }
+
+    .g-arrow:hover {
+      background: #fff;
+    }
+
+    .g-arrow.prev {
+      left: 9px;
+    }
+
+    .g-arrow.next {
+      right: 9px;
+    }
 
     .photo-count {
-      position: absolute; top: 10px; right: 10px;
-      background: rgba(0,0,0,.5); color: #fff;
-      font-size: .65rem; padding: 3px 9px; border-radius: 20px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, .5);
+      color: #fff;
+      font-size: .65rem;
+      padding: 3px 9px;
+      border-radius: 20px;
       backdrop-filter: blur(3px);
     }
+
     .room-badge {
-      position: absolute; top: 10px; left: 10px; z-index: 2;
-      background: var(--gold); color: var(--navy);
-      font-size: .58rem; font-weight: 700; letter-spacing: 1.5px;
-      text-transform: uppercase; padding: 5px 11px; border-radius: 2px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 2;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: .58rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 11px;
+      border-radius: 2px;
     }
-    .room-badge.dark { background: var(--navy); color: var(--gold-lt); }
+
+    .room-badge.dark {
+      background: var(--navy);
+      color: var(--gold-lt);
+    }
 
     /* DETAILS */
     .room-details {
-      flex: 1; padding: 26px 26px 22px;
-      display: flex; flex-direction: column;
+      flex: 1;
+      padding: 26px 26px 22px;
+      display: flex;
+      flex-direction: column;
     }
-    .room-top { flex: 1; }
+
+    .room-top {
+      flex: 1;
+    }
 
     .room-cat {
-      font-size: .6rem; font-weight: 600; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
+      font-size: .6rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
     }
+
     .room-name {
-      font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300;
-      color: var(--navy); line-height: 1.2; margin-bottom: 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 10px;
     }
-    .room-name em { font-style: italic; color: var(--gold); }
+
+    .room-name em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
     .room-desc {
-      font-size: .81rem; color: var(--muted); line-height: 1.65;
-      margin-bottom: 16px; max-width: 460px;
+      font-size: .81rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 16px;
+      max-width: 460px;
     }
 
     /* Amenities */
     .room-amen {
-      display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+      margin-bottom: 14px;
     }
+
     .amen {
-      display: flex; align-items: center; gap: 5px;
-      font-size: .73rem; color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: .73rem;
+      color: var(--text);
     }
-    .amen svg { width: 13px; height: 13px; fill: var(--gold); flex-shrink: 0; }
+
+    .amen svg {
+      width: 13px;
+      height: 13px;
+      fill: var(--gold);
+      flex-shrink: 0;
+    }
 
     /* Pills */
-    .room-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
+    .room-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 14px;
+    }
+
     .pill {
-      font-size: .63rem; font-weight: 500; padding: 3px 10px;
+      font-size: .63rem;
+      font-weight: 500;
+      padding: 3px 10px;
       border-radius: 20px;
-      background: rgba(201,168,76,.08); border: 1px solid rgba(201,168,76,.2);
+      background: rgba(201, 168, 76, .08);
+      border: 1px solid rgba(201, 168, 76, .2);
       color: #5a4200;
     }
-    .pill.green { background: rgba(22,163,74,.07); border-color: rgba(22,163,74,.2); color: #15803d; }
 
-    .room-divider { height: 1px; background: var(--border); margin: 12px 0; }
+    .pill.green {
+      background: rgba(22, 163, 74, .07);
+      border-color: rgba(22, 163, 74, .2);
+      color: #15803d;
+    }
+
+    .room-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 12px 0;
+    }
 
     /* Bottom */
-    .room-bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
-    .room-incl { font-size: .73rem; color: var(--muted); line-height: 1.65; }
-    .room-incl p { display: flex; align-items: center; gap: 5px; }
-    .room-incl p::before { content: '✓'; color: #22c55e; font-weight: 700; }
+    .room-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .room-incl {
+      font-size: .73rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .room-incl p {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .room-incl p::before {
+      content: '✓';
+      color: #22c55e;
+      font-weight: 700;
+    }
 
     /* Price */
-    .price-block { text-align: right; flex-shrink: 0; }
-    .price-old { font-size: .75rem; color: var(--muted); text-decoration: line-through; margin-bottom: 2px; }
-    .price-main {
-      font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600;
-      color: var(--navy); line-height: 1;
+    .price-block {
+      text-align: right;
+      flex-shrink: 0;
     }
-    .price-main sup { font-size: .9rem; font-weight: 400; color: var(--muted); vertical-align: super; }
-    .price-per { font-size: .68rem; color: var(--muted); margin-bottom: 12px; }
+
+    .price-old {
+      font-size: .75rem;
+      color: var(--muted);
+      text-decoration: line-through;
+      margin-bottom: 2px;
+    }
+
+    .price-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .price-main sup {
+      font-size: .9rem;
+      font-weight: 400;
+      color: var(--muted);
+      vertical-align: super;
+    }
+
+    .price-per {
+      font-size: .68rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
 
     .btn-reserver {
-      display: inline-block; padding: 11px 24px;
-      background: var(--navy); color: #fff; border: none; border-radius: 4px;
-      font-family: 'Jost', sans-serif; font-size: .7rem; font-weight: 600;
-      letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+      display: inline-block;
+      padding: 11px 24px;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Jost', sans-serif;
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
       text-decoration: none;
       transition: background .25s, transform .15s;
-      position: relative; overflow: hidden;
+      position: relative;
+      overflow: hidden;
     }
+
     .btn-reserver::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(201,168,76,.25), transparent);
-      transform: translateX(-100%); transition: transform .55s;
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(201, 168, 76, .25), transparent);
+      transform: translateX(-100%);
+      transition: transform .55s;
     }
-    .btn-reserver:hover { background: var(--navy-lt); }
-    .btn-reserver:hover::after { transform: translateX(100%); }
-    .btn-reserver:active { transform: scale(.97); }
+
+    .btn-reserver:hover {
+      background: var(--navy-lt);
+    }
+
+    .btn-reserver:hover::after {
+      transform: translateX(100%);
+    }
+
+    .btn-reserver:active {
+      transform: scale(.97);
+    }
 
     /* ══ SIDEBAR ══ */
-    .sidebar { position: sticky; top: 130px; }
+    .sidebar {
+      position: sticky;
+      top: 130px;
+    }
 
     .sidebar-card {
-      background: var(--white); border-radius: 10px;
-      border: 1px solid var(--border); padding: 24px;
-      box-shadow: 0 2px 16px rgba(0,0,0,.06);
+      background: var(--white);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 24px;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, .06);
       margin-bottom: 16px;
     }
+
     .sidebar-card::before {
-      content: ''; display: block; height: 3px; margin: -24px -24px 20px;
+      content: '';
+      display: block;
+      height: 3px;
+      margin: -24px -24px 20px;
       background: linear-gradient(90deg, var(--gold), var(--gold-lt), var(--gold));
       border-radius: 10px 10px 0 0;
     }
+
     .sidebar-title {
-      font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 300;
-      color: var(--navy); margin-bottom: 14px; line-height: 1.2;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: var(--navy);
+      margin-bottom: 14px;
+      line-height: 1.2;
     }
-    .sidebar-title em { font-style: italic; color: var(--gold); }
-    .sidebar-sub { font-size: .76rem; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+
+    .sidebar-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .sidebar-sub {
+      font-size: .76rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
 
     .sidebar-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, .05);
       font-size: .78rem;
     }
-    .sidebar-row:last-child { border-bottom: none; }
-    .sidebar-row .lbl { color: var(--muted); }
-    .sidebar-row .val { color: var(--navy); font-weight: 500; }
+
+    .sidebar-row:last-child {
+      border-bottom: none;
+    }
+
+    .sidebar-row .lbl {
+      color: var(--muted);
+    }
+
+    .sidebar-row .val {
+      color: var(--navy);
+      font-weight: 500;
+    }
 
     .btn-res-sidebar {
-      display: block; width: 100%; padding: 13px;
-      background: var(--gold); color: var(--navy); border: none; border-radius: 4px;
-      font-family: 'Jost', sans-serif; font-size: .72rem; font-weight: 700;
-      letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
-      text-align: center; text-decoration: none; margin-top: 16px;
+      display: block;
+      width: 100%;
+      padding: 13px;
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      border-radius: 4px;
+      font-family: 'Jost', sans-serif;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      margin-top: 16px;
       transition: background .25s;
     }
-    .btn-res-sidebar:hover { background: var(--gold-lt); }
 
-    .hotel-facts { display: flex; flex-direction: column; gap: 10px; }
-    .fact { display: flex; align-items: center; gap: 10px; font-size: .78rem; color: var(--muted); }
+    .btn-res-sidebar:hover {
+      background: var(--gold-lt);
+    }
+
+    .hotel-facts {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .fact {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
     .fact-icon {
-      width: 32px; height: 32px; background: rgba(201,168,76,.1); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      background: rgba(201, 168, 76, .1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
       font-size: 1rem;
     }
 
     /* ══ LIGHTBOX ══ */
     .lightbox {
-      display: none; position: fixed; inset: 0; z-index: 3000;
-      background: rgba(5,10,20,.94); backdrop-filter: blur(6px);
-      align-items: center; justify-content: center;
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      background: rgba(5, 10, 20, .94);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
     }
-    .lightbox.open { display: flex; }
-    .lightbox-img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 4px; }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+
     .lb-close {
-      position: absolute; top: 18px; right: 26px;
-      background: none; border: none; color: rgba(255,255,255,.7);
-      font-size: 2rem; cursor: pointer; transition: color .2s; line-height: 1;
+      position: absolute;
+      top: 18px;
+      right: 26px;
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, .7);
+      font-size: 2rem;
+      cursor: pointer;
+      transition: color .2s;
+      line-height: 1;
     }
-    .lb-close:hover { color: #fff; }
+
+    .lb-close:hover {
+      color: #fff;
+    }
+
     .lb-nav {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      background: rgba(255,255,255,.15); border: none; border-radius: 50%;
-      width: 46px; height: 46px; color: #fff; font-size: 1.3rem;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, .15);
+      border: none;
+      border-radius: 50%;
+      width: 46px;
+      height: 46px;
+      color: #fff;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: background .2s;
     }
-    .lb-nav:hover { background: rgba(255,255,255,.25); }
-    .lb-nav.prev { left: 18px; }
-    .lb-nav.next { right: 18px; }
+
+    .lb-nav:hover {
+      background: rgba(255, 255, 255, .25);
+    }
+
+    .lb-nav.prev {
+      left: 18px;
+    }
+
+    .lb-nav.next {
+      right: 18px;
+    }
+
     .lb-count {
-      position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
-      color: rgba(255,255,255,.6); font-size: .8rem; letter-spacing: 1px;
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, .6);
+      font-size: .8rem;
+      letter-spacing: 1px;
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @media (max-width: 1100px) {
-      .page-body { grid-template-columns: 1fr; }
-      .sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .page-body {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
     }
+
     @media (max-width: 860px) {
-      .room-row { flex-direction: column; }
-      .room-gallery { flex: none; height: 240px; }
-      .gallery-main, .gallery-main img.active { height: 240px; }
-      .navbar { padding: 0 22px; }
-      .nav-links { gap: 12px; }
-      .page-body { padding: 16px 20px 50px; }
-      .filter-inner { padding: 0 20px; }
+      .room-row {
+        flex-direction: column;
+      }
+
+      .room-gallery {
+        flex: none;
+        height: 240px;
+      }
+
+      .gallery-main,
+      .gallery-main img.active {
+        height: 240px;
+      }
+
+      .navbar {
+        padding: 0 22px;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .page-body {
+        padding: 16px 20px 50px;
+      }
+
+      .filter-inner {
+        padding: 0 20px;
+      }
     }
+
     @media (max-width: 600px) {
-      .hero-content h1 { font-size: 2.2rem; }
-      .room-bottom { flex-direction: column; align-items: flex-start; }
-      .price-block { text-align: left; }
-      .sidebar { grid-template-columns: 1fr; }
+      .hero-content h1 {
+        font-size: 2.2rem;
+      }
+
+      .room-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .price-block {
+        text-align: left;
+      }
+
+      .sidebar {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <a href="#" class="nav-logo">
-    <div class="nav-logo-icon">M</div>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">M</div>
+      <div>
+        <div class="nav-logo-name">Mahari Hôtel</div>
+        <div class="nav-logo-sub">Djerba · Tunisie</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="accueil.html">Accueil</a></li>
+      <li><a href="reservation.html">Réservation</a></li>
+      <li class="active"><a href="carte-chambres.html">Chambres</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="profil.html">Profil</a></li>
+      <li><a href="registre.html">Registre</a></li>
+      <li data-show-logged-out><a href="login.html">Connexion</a></li>
+      <li data-show-logged-in><a href="#" data-logout="true">Déconnexion</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO with slideshow -->
+  <div class="hero">
+    <div class="hero-slides">
+      <div class="hero-slide active"
+        style="background-image:url('https://cf.bstatic.com/xdata/images/hotel/max1024x768/374102776.jpg?k=c49ea696bb00ed4cb5ee4d0a23f571879ee71eba12cd5f37c7f3e3a9c7b8b01f&o=')">
+      </div>
+      <div class="hero-slide"
+        style="background-image:url('https://cf.bstatic.com/xdata/images/hotel/max1024x768/374102841.jpg?k=6f4bfe7dfdd82b2cf487ca2e4ce3d0b2b4eb3aa8d8e9c6a0f31d10c3a8b7c8f1&o=')">
+      </div>
+      <div class="hero-slide"
+        style="background-image:url('https://cf.bstatic.com/xdata/images/hotel/max1024x768/374102820.jpg?k=d8b3e2f1a7c9e4b0d5a8c3f6b9e2d5a8c1f4b7e0d3a6c9f2b5e8d1a4c7f0b3e6&o=')">
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-tag">Iberostar Mehari · Djerba · Rénové 2024</div>
+      <h1>Nos <em>Chambres</em> & Suites</h1>
+      <p>300 chambres face à la mer, entourées de 80 000 m² de jardins et de palmiers sur la plage de Sidi Akkour.</p>
+    </div>
+  </div>
+
+  <!-- STICKY FILTER BAR -->
+  <div class="filter-sticky">
+    <div class="filter-inner">
+      <span class="filter-label">Filtrer :</span>
+      <button class="filter-btn active" data-filter="all">Tout afficher</button>
+      <button class="filter-btn" data-filter="standard">Standard</button>
+      <button class="filter-btn" data-filter="vue-mer">Vue Mer</button>
+      <button class="filter-btn" data-filter="bungalow">Bungalow</button>
+      <button class="filter-btn" data-filter="suite">Suite</button>
+      <button class="filter-btn" data-filter="famille">Famille</button>
+    </div>
+  </div>
+
+  <!-- PAGE BODY -->
+  <div class="page-body">
+
+    <!-- LEFT: rooms list -->
     <div>
-      <div class="nav-logo-name">Mahari Hôtel</div>
-      <div class="nav-logo-sub">Djerba · Tunisie</div>
-    </div>
-  </a>
-  <ul class="nav-links">
-    <li><a href="accueil.html">Accueil</a></li>
-    <li><a href="reservation.html">Réservation</a></li>
-    <li class="active"><a href="carte-chambres.html">Chambres</a></li>
-    <li><a href="services.html">Services</a></li>
-    <li><a href="profil.html">Profil</a></li>
-    <li><a href="login.html">Connexion</a></li>
-  </ul>
-</nav>
+      <p class="results-label"><strong id="count">6</strong> types de chambres disponibles — Iberostar Mehari Djerba</p>
 
-<!-- HERO with slideshow -->
-<div class="hero">
-  <div class="hero-slides">
-    <div class="hero-slide active" style="background-image:url('https://image.resabooking.com/images/hotel/iberostar_mehari_djerba_6.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/490423790.jpg?k=d20607899ad848053620b61a01542e649db50b1875a1141abf8282d554af6c52&o=&s=1024x')"></div>
-    <div class="hero-slide" style="background-image:url('https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/581851399.jpg?k=65bb8eaa4e9d4ba155dc6ce7edd59ff33b65bf9fd9ff170bb2b7f1676487a234&o=&s=1024x')"></div>
+      <!-- ─── CHAMBRE DOUBLE STANDARD ─── -->
+      <div class="room-row" data-category="standard" style="animation-delay:.05s">
+        <div class="room-gallery">
+          <div class="gallery-main" id="g1">
+            <img
+              src="https://pix8.agoda.net/hotelImages/5915786/-1/af95b7573207fe75c6911dba35bfa202.jpg?ca=7&ce=1&s=1024x"
+              class="active" alt="">
+            <img
+              src="https://pix8.agoda.net/property/5915786/879239813/9670bdda2b2203841c1fafbe21b8db71.jpeg?ce=0&s=1024x"
+              alt="">
+            <img src="https://pix8.agoda.net/property/60421789/0/214040af12f282f3ce0e9beed240dd9a.jpeg?ce=0&s=1024x"
+              alt="">
+          </div>
+          <button class="g-arrow prev" onclick="prev(1)">&#8249;</button>
+          <button class="g-arrow next" onclick="next(1)">&#8250;</button>
+          <span class="photo-count" id="c1">1 / 3</span>
+          <span class="room-badge">Standard</span>
+          <div class="gallery-thumbs">
+            <img class="g-thumb active"
+              src="https://pix8.agoda.net/hotelImages/5915786/-1/af95b7573207fe75c6911dba35bfa202.jpg?ca=7&ce=1&s=1024x"
+              onclick="goTo(1,0)">
+            <img class="g-thumb"
+              src="https://pix8.agoda.net/property/5915786/879239813/9670bdda2b2203841c1fafbe21b8db71.jpeg?ce=0&s=1024x"
+              onclick="goTo(1,1)">
+            <img class="g-thumb"
+              src="https://pix8.agoda.net/property/60421789/0/214040af12f282f3ce0e9beed240dd9a.jpeg?ce=0&s=1024x"
+              onclick="goTo(1,2)">
+          </div>
+        </div>
+        <div class="room-details">
+          <div class="room-top">
+            <p class="room-cat">Confort · Standard</p>
+            <h2 class="room-name">Chambre <em>Double Standard</em></h2>
+            <p class="room-desc">Chambre lumineuse et rénovée avec balcon vue jardin, décoration inspirée de l'artisanat
+              tunisien, literie premium et salle de bain moderne entièrement équipée.</p>
+            <div class="room-amen">
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm12-7h-8v8H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z" />
+                </svg>Lit double</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M3 11h18v2H3zm0-4h18v2H3zm0 8h18v2H3z" />
+                </svg>32 m²</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                </svg>Vue jardin</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M2 17h20v2H2z" />
+                </svg>Balcon privatif</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9z" />
+                </svg>Wi-Fi inclus</span>
+            </div>
+            <div class="room-pills">
+              <span class="pill">Climatisation</span>
+              <span class="pill">TV satellite</span>
+              <span class="pill">Minibar</span>
+              <span class="pill">Coffre-fort</span>
+              <span class="pill">Sèche-cheveux</span>
+              <span class="pill green">✓ Annulation gratuite</span>
+            </div>
+          </div>
+          <div class="room-divider"></div>
+          <div class="room-bottom">
+            <div class="room-incl">
+              <p>Petit-déjeuner buffet inclus</p>
+              <p>Accès piscine & plage Sidi Akkour</p>
+            </div>
+            <div class="price-block">
+              <div class="price-old">€ 150 / nuit</div>
+              <div class="price-main"><sup>€</sup>120</div>
+              <div class="price-per">par nuit · taxes incluses</div>
+              <a href="reservation.php?chambre=standard" class="btn-reserver">Réserver</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── CHAMBRE PREMIUM VUE MER ─── -->
+      <div class="room-row" data-category="vue-mer" style="animation-delay:.1s">
+        <div class="room-gallery">
+          <div class="gallery-main" id="g2">
+            <img
+              src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/581850316.jpg?k=f99867a3cfecc843c9948f82ce69be6748d770c69a1d1dcc782f160db6a42806&o=&s=1024x"
+              class="active" alt="">
+            <img
+              src="https://pix8.agoda.net/property/37399930/619023655/2d9e2430053a9e41df18a6a3c65771b5.jpeg?ce=3&s=1024x"
+              alt="">
+            <img
+              src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/581850851.jpg?k=e3c7a396e64d31d3feaef3bb1536966d9ed3e26db1362984eddcdff9d6ed3d38&o=&s=1024x"
+              alt="">
+            <img
+              src="https://pix8.agoda.net/property/37399930/619023655/1bca21e4edaebe688b4d6cab01517549.jpeg?ce=3&s=1024x"
+              alt="">
+          </div>
+          <button class="g-arrow prev" onclick="prev(2)">&#8249;</button>
+          <button class="g-arrow next" onclick="next(2)">&#8250;</button>
+          <span class="photo-count" id="c2">1 / 4</span>
+          <span class="room-badge">Vue Mer</span>
+          <div class="gallery-thumbs">
+            <img class="g-thumb active"
+              src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/581850316.jpg?k=f99867a3cfecc843c9948f82ce69be6748d770c69a1d1dcc782f160db6a42806&o=&s=1024x"
+              onclick="goTo(2,0)">
+            <img class="g-thumb"
+              src="https://pix8.agoda.net/property/37399930/619023655/2d9e2430053a9e41df18a6a3c65771b5.jpeg?ce=3&s=1024x"
+              onclick="goTo(2,1)">
+            <img class="g-thumb"
+              src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/581850851.jpg?k=e3c7a396e64d31d3feaef3bb1536966d9ed3e26db1362984eddcdff9d6ed3d38&o=&s=1024x"
+              onclick="goTo(2,2)">
+            <img class="g-thumb"
+              src="https://pix8.agoda.net/property/37399930/619023655/1bca21e4edaebe688b4d6cab01517549.jpeg?ce=3&s=1024x"
+              onclick="goTo(2,3)">
+          </div>
+        </div>
+        <div class="room-details">
+          <div class="room-top">
+            <p class="room-cat">Vue Panoramique · Mer</p>
+            <h2 class="room-name">Chambre <em>Premium Vue Mer</em></h2>
+            <p class="room-desc">Réveillez-vous face à la Méditerranée. Chambre fraîchement rénovée (2024) avec terrasse
+              privée pour profiter des couchers de soleil et de la brise marine tunisienne.</p>
+            <div class="room-amen">
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm12-7h-8v8H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z" />
+                </svg>Lit queen-size</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M3 11h18v2H3zm0-4h18v2H3zm0 8h18v2H3z" />
+                </svg>38 m²</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                </svg>Vue mer directe</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M2 17h20v2H2z" />
+                </svg>Terrasse privée</span>
+            </div>
+            <div class="room-pills">
+              <span class="pill">Climatisation</span>
+              <span class="pill">Minibar</span>
+              <span class="pill">Peignoir inclus</span>
+              <span class="pill">Accès terrasse rooftop</span>
+              <span class="pill green">✓ Annulation flexible</span>
+            </div>
+          </div>
+          <div class="room-divider"></div>
+          <div class="room-bottom">
+            <div class="room-incl">
+              <p>Petit-déjeuner buffet inclus</p>
+              <p>Accès terrasse Premium inclus</p>
+              <p>Plage Sidi Akkour à 2 min</p>
+            </div>
+            <div class="price-block">
+              <div class="price-old">€ 280 / nuit</div>
+              <div class="price-main"><sup>€</sup>220</div>
+              <div class="price-per">par nuit · taxes incluses</div>
+              <a href="reservation.php?chambre=superieure" class="btn-reserver">Réserver</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── BUNGALOW ─── -->
+      <div class="room-row" data-category="bungalow" style="animation-delay:.15s">
+        <div class="room-gallery">
+          <div class="gallery-main" id="g3">
+            <img src="https://image.resabooking.com/images/hotel/iberostar_mehari_djerba_9.jpg" class="active" alt="">
+            <img
+              src="https://q-xx.bstatic.com/xdata/images/hotel/max500/555915040.jpg?k=3afc50360c577f0dceea900f89beefe60313ddf2467efc7d9b5ef97efdc5f8a7&o="
+              alt="">
+            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/d1/20/d3/caption.jpg?w=1100&h=1100&s=1"
+              alt="">
+            <img
+              src="https://pix10.agoda.net/property/38835170/686418643/5b078809326ad6505dcaeef03dda4718.jpeg?ce=0&s=414x232"
+              alt="">
+            <img src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/15854/1585464/1585464304.JPEG"
+              alt="">
+          </div>
+          <button class="g-arrow prev" onclick="prev(4)">&#8249;</button>
+          <button class="g-arrow next" onclick="next(4)">&#8250;</button>
+          <span class="photo-count" id="c4">1 / 5</span>
+          <span class="room-badge">Nouveau 2024</span>
+          <div class="gallery-thumbs">
+            <img class="g-thumb active" src="https://image.resabooking.com/images/hotel/iberostar_mehari_djerba_9.jpg"
+              onclick="goTo(5,0)">
+            <img class="g-thumb"
+              src="https://q-xx.bstatic.com/xdata/images/hotel/max500/555915040.jpg?k=3afc50360c577f0dceea900f89beefe60313ddf2467efc7d9b5ef97efdc5f8a7&o="
+              onclick="goTo(5,1)">
+            <img class="g-thumb"
+              src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/d1/20/d3/caption.jpg?w=1100&h=1100&s=1"
+              onclick="goTo(5,2)">
+            <img class="g-thumb"
+              src="https://pix10.agoda.net/property/38835170/686418643/5b078809326ad6505dcaeef03dda4718.jpeg?ce=0&s=414x232"
+              onclick="goTo(5,3)">
+            <img class="g-thumb"
+              src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/15854/1585464/1585464304.JPEG"
+              onclick="goTo(5,4)">
+          </div>
+        </div>
+        <div class="room-details">
+          <div class="room-top">
+            <p class="room-cat">Exclusif · Bungalow Plage</p>
+            <h2 class="room-name">Bungalow <em>Palmiers & Jardins</em></h2>
+            <p class="room-desc">Les nouveaux bungalows de 2024 sont intégrés dans la nature, entourés de palmiers et
+              d'oliviers, avec accès direct à la plage de Sidi Akkour. Une expérience de séjour unique en harmonie avec
+              l'environnement.</p>
+            <div class="room-amen">
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm12-7h-8v8H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z" />
+                </svg>Lit king-size</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M3 11h18v2H3zm0-4h18v2H3zm0 8h18v2H3z" />
+                </svg>50 m²</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                </svg>Vue jardins & palmiers</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M2 17h20v2H2z" />
+                </svg>Terrasse & transats</span>
+            </div>
+            <div class="room-pills">
+              <span class="pill">Salon séparé</span>
+              <span class="pill">Accès direct plage</span>
+              <span class="pill">Machine à café</span>
+              <span class="pill">Minibar premium</span>
+              <span class="pill green">✓ Zéro plastique usage unique</span>
+            </div>
+          </div>
+          <div class="room-divider"></div>
+          <div class="room-bottom">
+            <div class="room-incl">
+              <p>Formule All-Inclusive disponible</p>
+              <p>Service de plage privatif inclus</p>
+              <p>Accès spa & hammam</p>
+            </div>
+            <div class="price-block">
+              <div class="price-old">€ 360 / nuit</div>
+              <div class="price-main"><sup>€</sup>290</div>
+              <div class="price-per">par nuit · taxes incluses</div>
+              <a href="reservation.php?chambre=deluxe" class="btn-reserver">Réserver</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── SUITE PRESTIGE JACUZZI ─── -->
+      <div class="room-row" data-category="suite vue-mer" style="animation-delay:.2s">
+        <div class="room-gallery">
+          <div class="gallery-main" id="g4">
+            <img src="https://www.tema.golf/wp-content/uploads/2025/01/iberostar-djerba-11.jpg" class="active" alt="">
+            <img
+              src="https://www.destinationtunisie.info/wp-content/uploads/2024/06/chambre-hotel-iberostar-mehari-djerba.jpg"
+              alt="">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXXPZNXwkSpH0gXo2jQxc4ns8q2Q_QxWv7IA&s"
+              alt="">
+
+          </div>
+          <button class="g-arrow prev" onclick="prev(3)">&#8249;</button>
+          <button class="g-arrow next" onclick="next(3)">&#8250;</button>
+          <span class="photo-count" id="c4">1 / 3</span>
+          <span class="room-badge dark">★ Prestige</span>
+          <div class="gallery-thumbs">
+            <img class="g-thumb active" src="https://www.tema.golf/wp-content/uploads/2025/01/iberostar-djerba-11.jpg"
+              onclick="goTo(3,0)">
+            <img class="g-thumb"
+              src="https://www.destinationtunisie.info/wp-content/uploads/2024/06/chambre-hotel-iberostar-mehari-djerba.jpg"
+              onclick="goTo(3,1)">
+            <img class="g-thumb"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXXPZNXwkSpH0gXo2jQxc4ns8q2Q_QxWv7IA&s"
+              onclick="goTo(3,2)">
+          </div>
+        </div>
+        <div class="room-details">
+          <div class="room-top">
+            <p class="room-cat">Suite Exclusive · Vue Mer & Jardins</p>
+            <h2 class="room-name">Suite <em>Prestige Jacuzzi Terrasse</em></h2>
+            <p class="room-desc">Suite élégante au 1er étage avec grande terrasse privée équipée d'un jacuzzi, transats
+              et vue imprenable. L'espace idéal pour une occasion spéciale ou une escapade romantique à Djerba.</p>
+            <div class="room-amen">
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm12-7h-8v8H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z" />
+                </svg>Lit king-size</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M3 11h18v2H3zm0-4h18v2H3zm0 8h18v2H3z" />
+                </svg>65 m²</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                </svg>Vue mer & jardins</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M17 8C8 10 5.9 16.17 3.82 28h2.96z" />
+                </svg>Jacuzzi privatif</span>
+            </div>
+            <div class="room-pills">
+              <span class="pill">Salon séparé</span>
+              <span class="pill">Jacuzzi terrasse</span>
+              <span class="pill">Peignoir & pantoufles</span>
+              <span class="pill">Room service 24h</span>
+              <span class="pill">Rooftop Premium inclus</span>
+              <span class="pill green">✓ Meilleur prix garanti</span>
+            </div>
+          </div>
+          <div class="room-divider"></div>
+          <div class="room-bottom">
+            <div class="room-incl">
+              <p>Champagne à l'arrivée offert</p>
+              <p>Accès prioritaire spa & hammam</p>
+              <p>Late check-out jusqu'à 14h</p>
+            </div>
+            <div class="price-block">
+              <div class="price-old">€ 480 / nuit</div>
+              <div class="price-main"><sup>€</sup>380</div>
+              <div class="price-per">par nuit · taxes incluses</div>
+              <a href="reservation.php?chambre=prestige" class="btn-reserver">Réserver</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── CHAMBRE FAMILIALE ─── -->
+      <div class="room-row" data-category="famille standard" style="animation-delay:.25s">
+        <div class="room-gallery">
+          <div class="gallery-main" id="g5">
+            <img src="https://happywaytravel.tn/public/images/image/Iberostar_Mehari_Djerba_4_0.85206800-1713960147.jpg"
+              class="active" alt="">
+            <img src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/16029/1602957/1602957931.JPEG"
+              alt="">
+            <img src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/16053/1605375/1605375787.JPEG"
+              alt="">
+          </div>
+          <button class="g-arrow prev" onclick="prev(5)">&#8249;</button>
+          <button class="g-arrow next" onclick="next(5)">&#8250;</button>
+          <span class="photo-count" id="c5">1 / 3</span>
+          <span class="room-badge">Famille</span>
+          <div class="gallery-thumbs">
+            <img class="g-thumb active"
+              src="https://happywaytravel.tn/public/images/image/Iberostar_Mehari_Djerba_4_0.85206800-1713960147.jpg"
+              onclick="goTo(5,0)">
+            <img class="g-thumb"
+              src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/16029/1602957/1602957931.JPEG"
+              onclick="goTo(5,1)">
+            <img class="g-thumb"
+              src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/16053/1605375/1605375787.JPEG"
+              onclick="goTo(5,2)">
+          </div>
+        </div>
+        <div class="room-details">
+          <div class="room-top">
+            <p class="room-cat">Confort · Famille</p>
+            <h2 class="room-name">Chambre <em>Familiale Communicante</em></h2>
+            <p class="room-desc">Deux chambres communicantes idéales pour les familles. Les enfants ont leur espace
+              indépendant, les parents peuvent surveiller facilement. Terrasse commune vue jardin incluse.</p>
+            <div class="room-amen">
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm12-7h-8v8H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z" />
+                </svg>2 chambres</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M3 11h18v2H3zm0-4h18v2H3zm0 8h18v2H3z" />
+                </svg>70 m²</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                </svg>Vue jardin</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9z" />
+                </svg>4 à 6 personnes</span>
+            </div>
+            <div class="room-pills">
+              <span class="pill">Portes communicantes</span>
+              <span class="pill">Lit bébé dispo</span>
+              <span class="pill">TV dans chaque chambre</span>
+              <span class="pill">Star Camp inclus</span>
+              <span class="pill green">✓ Enfants bienvenus</span>
+            </div>
+          </div>
+          <div class="room-divider"></div>
+          <div class="room-bottom">
+            <div class="room-incl">
+              <p>Programme Star Camp enfants inclus</p>
+              <p>Piscine & Aqua-Fun pour enfants</p>
+              <p>Petit-déjeuner buffet pour tous</p>
+            </div>
+            <div class="price-block">
+              <div class="price-old">€ 390 / nuit</div>
+              <div class="price-main"><sup>€</sup>310</div>
+              <div class="price-per">par nuit · taxes incluses</div>
+              <a href="reservation.php?chambre=standard" class="btn-reserver">Réserver</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── JUNIOR SUITE VUE PISCINE ─── -->
+      <div class="room-row" data-category="suite" style="animation-delay:.3s">
+        <div class="room-gallery">
+          <div class="gallery-main" id="g6">
+            <img src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/16029/1602957/1602957933.JPEG"
+              class="active" alt="">
+            <img src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/12746/1274610/1274610595.JPEG"
+              alt="">
+            <img src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/16029/1602957/1602957929.JPEG"
+              alt="">
+          </div>
+          <button class="g-arrow prev" onclick="prev(6)">&#8249;</button>
+          <button class="g-arrow next" onclick="next(6)">&#8250;</button>
+          <span class="photo-count" id="c6">1 / 3</span>
+          <span class="room-badge dark">Junior Suite</span>
+          <div class="gallery-thumbs">
+            <img class="g-thumb active"
+              src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/16029/1602957/1602957933.JPEG"
+              onclick="goTo(6,0)">
+            <img class="g-thumb"
+              src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/12746/1274610/1274610595.JPEG"
+              onclick="goTo(6,1)">
+            <img class="g-thumb"
+              src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/16029/1602957/1602957929.JPEG"
+              onclick="goTo(6,2)">
+          </div>
+        </div>
+        <div class="room-details">
+          <div class="room-top">
+            <p class="room-cat">Suite · Vue Piscine</p>
+            <h2 class="room-name">Junior Suite <em>Pool View</em></h2>
+            <p class="room-desc">L'une des plus grandes chambres de l'hôtel. Depuis le balcon, choisissez votre transat
+              avant même de descendre. Baignoire îlot, salon attenant et vue directe sur la piscine principale.</p>
+            <div class="room-amen">
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path
+                    d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm12-7h-8v8H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z" />
+                </svg>Lit king-size</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M3 11h18v2H3zm0-4h18v2H3zm0 8h18v2H3z" />
+                </svg>60 m²</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                </svg>Vue piscine directe</span>
+              <span class="amen"><svg viewBox="0 0 24 24">
+                  <path d="M2 17h20v2H2z" />
+                </svg>Balcon spacieux</span>
+            </div>
+            <div class="room-pills">
+              <span class="pill">Salon attenant</span>
+              <span class="pill">Baignoire îlot</span>
+              <span class="pill">Nespresso machine</span>
+              <span class="pill">Accès swim-up bar</span>
+              <span class="pill">Room service</span>
+              <span class="pill green">✓ Late check-out 14h</span>
+            </div>
+          </div>
+          <div class="room-divider"></div>
+          <div class="room-bottom">
+            <div class="room-incl">
+              <p>Petit-déjeuner buffet ou en chambre</p>
+              <p>Accès spa & centre fitness</p>
+              <p>Late check-out jusqu'à 14h</p>
+            </div>
+            <div class="price-block">
+              <div class="price-old">€ 330 / nuit</div>
+              <div class="price-main"><sup>€</sup>260</div>
+              <div class="price-per">par nuit · taxes incluses</div>
+              <a href="reservation.php?chambre=deluxe" class="btn-reserver">Réserver</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /rooms list -->
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-card">
+        <h3 class="sidebar-title">Réserver votre <em>séjour</em></h3>
+        <p class="sidebar-sub">Réservez directement sur notre site pour les meilleurs tarifs garantis.</p>
+        <div class="sidebar-row"><span class="lbl">Check-in</span><span class="val">Dès 15h00</span></div>
+        <div class="sidebar-row"><span class="lbl">Check-out</span><span class="val">Avant 12h00</span></div>
+        <div class="sidebar-row"><span class="lbl">Langues</span><span class="val">FR · EN · AR · DE</span></div>
+        <div class="sidebar-row"><span class="lbl">Paiement</span><span class="val">CB, Visa, Mastercard</span></div>
+        <a href="reservation.html" class="btn-res-sidebar">Réserver maintenant</a>
+      </div>
+
+      <div class="sidebar-card">
+        <h3 class="sidebar-title">L'<em>hôtel</em> en chiffres</h3>
+        <div class="hotel-facts">
+          <div class="fact">
+            <div class="fact-icon">🛏️</div><span>300 chambres & suites rénovées 2024</span>
+          </div>
+          <div class="fact">
+            <div class="fact-icon">🌊</div><span>Accès direct plage Sidi Akkour</span>
+          </div>
+          <div class="fact">
+            <div class="fact-icon">🌿</div><span>80 000 m² de jardins & palmiers</span>
+          </div>
+          <div class="fact">
+            <div class="fact-icon">🏊</div><span>2 piscines + Aqua-Fun enfants</span>
+          </div>
+          <div class="fact">
+            <div class="fact-icon">🍽️</div><span>2 restaurants + bars plage & piscine</span>
+          </div>
+          <div class="fact">
+            <div class="fact-icon">⭐</div><span>TripAdvisor 4.5/5 · 5 800+ avis</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-body -->
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lb-close" onclick="closeLb()">✕</button>
+    <button class="lb-nav prev" onclick="lbNav(-1)">&#8249;</button>
+    <img class="lightbox-img" id="lbImg" src="" alt="">
+    <button class="lb-nav next" onclick="lbNav(1)">&#8250;</button>
+    <div class="lb-count" id="lbCount"></div>
   </div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-tag">Iberostar Mehari · Djerba · Rénové 2024</div>
-    <h1>Nos <em>Chambres</em> & Suites</h1>
-    <p>300 chambres face à la mer, entourées de 80 000 m² de jardins et de palmiers sur la plage de Sidi Akkour.</p>
-  </div>
-</div>
 
-<!-- STICKY FILTER BAR -->
-<div class="filter-sticky">
-  <div class="filter-inner">
-    <span class="filter-label">Filtrer :</span>
-    <button class="filter-btn active" data-filter="all">Tout afficher</button>
-    <button class="filter-btn" data-filter="standard">Standard</button>
-    <button class="filter-btn" data-filter="vue-mer">Vue Mer</button>
-    <button class="filter-btn" data-filter="bungalow">Bungalow</button>
-    <button class="filter-btn" data-filter="suite">Suite</button>
-    <button class="filter-btn" data-filter="famille">Famille</button>
-  </div>
-</div>
-
-<!-- PAGE BODY -->
-<div class="page-body">
-
-  <!-- LEFT: rooms list -->
-  <div>
-    <p class="results-label"><strong id="count">6</strong> types de chambres disponibles — Iberostar Mehari Djerba</p>
-
-    <!-- ─── CHAMBRE DOUBLE STANDARD ─── -->
-    <div class="room-row" data-category="standard" style="animation-delay:.05s">
-      <div class="room-gallery">
-        <div class="gallery-main" id="g1">
-          <img src="https://pix8.agoda.net/hotelImages/5915786/-1/af95b7573207fe75c6911dba35bfa202.jpg?ca=7&ce=1&s=1024x" class="active" alt="">
-          <img src="https://pix8.agoda.net/property/5915786/879239813/9670bdda2b2203841c1fafbe21b8db71.jpeg?ce=0&s=1024x" alt="">
-          <img src="https://pix8.agoda.net/property/60421789/0/214040af12f282f3ce0e9beed240dd9a.jpeg?ce=0&s=1024x" alt="">
-        </div>
-        <button class="g-arrow prev" onclick="prev(1)">&#8249;</button>
-        <button class="g-arrow next" onclick="next(1)">&#8250;</button>
-        <span class="photo-count" id="c1">1 / 3</span>
-        <span class="room-badge">Standard</span>
-        <div class="gallery-thumbs">
-          <img class="g-thumb active" src="https://pix8.agoda.net/hotelImages/5915786/-1/af95b7573207fe75c6911dba35bfa202.jpg?ca=7&ce=1&s=1024x" onclick="goTo(1,0)">
-            <img class="g-thumb" src="https://pix8.agoda.net/property/5915786/879239813/9670bdda2b2203841c1fafbe21b8db71.jpeg?ce=0&s=1024x" onclick="goTo(1,1)">
-          <img class="g-thumb" src="https://pix8.agoda.net/property/60421789/0/214040af12f282f3ce0e9beed240dd9a.jpeg?ce=0&s=1024x" onclick="goTo(1,2)">
-        </div>
-      </div>
-      <div class="room-details">
-        <div class="room-top">
-          <p class="room-cat">Confort · Standard</p>
-          <h2 class="room-name">Chambre <em>Double Standard</em></h2>
-          <p class="room-desc">Chambre lumineuse et rénovée avec balcon vue jardin, décoration inspirée de l'artisanat tunisien, literie premium et salle de bain moderne entièrement équipée.</p>
-          <div class="room-amen">
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm12-7h-8v8H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>Lit double</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M3 11h18v2H3zm0-4h18v2H3zm0 8h18v2H3z"/></svg>32 m²</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>Vue jardin</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M2 17h20v2H2z"/></svg>Balcon privatif</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9z"/></svg>Wi-Fi inclus</span>
-          </div>
-          <div class="room-pills">
-            <span class="pill">Climatisation</span>
-            <span class="pill">TV satellite</span>
-            <span class="pill">Minibar</span>
-            <span class="pill">Coffre-fort</span>
-            <span class="pill">Sèche-cheveux</span>
-            <span class="pill green">✓ Annulation gratuite</span>
-          </div>
-        </div>
-        <div class="room-divider"></div>
-        <div class="room-bottom">
-          <div class="room-incl">
-            <p>Petit-déjeuner buffet inclus</p>
-            <p>Accès piscine & plage Sidi Akkour</p>
-          </div>
-          <div class="price-block">
-            <div class="price-old">€ 150 / nuit</div>
-            <div class="price-main"><sup>€</sup>120</div>
-            <div class="price-per">par nuit · taxes incluses</div>
-            <a href="reservation.php?chambre=standard" class="btn-reserver">Réserver</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ─── CHAMBRE PREMIUM VUE MER ─── -->
-    <div class="room-row" data-category="vue-mer" style="animation-delay:.1s">
-      <div class="room-gallery">
-        <div class="gallery-main" id="g2">
-          <img src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/581850316.jpg?k=f99867a3cfecc843c9948f82ce69be6748d770c69a1d1dcc782f160db6a42806&o=&s=1024x" class="active" alt="">
-          <img src="https://pix8.agoda.net/property/37399930/619023655/2d9e2430053a9e41df18a6a3c65771b5.jpeg?ce=3&s=1024x" alt="">
-          <img src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/581850851.jpg?k=e3c7a396e64d31d3feaef3bb1536966d9ed3e26db1362984eddcdff9d6ed3d38&o=&s=1024x" alt="">
-          <img src="https://pix8.agoda.net/property/37399930/619023655/1bca21e4edaebe688b4d6cab01517549.jpeg?ce=3&s=1024x" alt="">
-        </div>
-        <button class="g-arrow prev" onclick="prev(2)">&#8249;</button>
-        <button class="g-arrow next" onclick="next(2)">&#8250;</button>
-        <span class="photo-count" id="c2">1 / 4</span>
-        <span class="room-badge">Vue Mer</span>
-        <div class="gallery-thumbs">
-          <img class="g-thumb active" src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/581850316.jpg?k=f99867a3cfecc843c9948f82ce69be6748d770c69a1d1dcc782f160db6a42806&o=&s=1024x" onclick="goTo(2,0)">
-          <img class="g-thumb" src="https://pix8.agoda.net/property/37399930/619023655/2d9e2430053a9e41df18a6a3c65771b5.jpeg?ce=3&s=1024x" onclick="goTo(2,1)">
-          <img class="g-thumb" src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/581850851.jpg?k=e3c7a396e64d31d3feaef3bb1536966d9ed3e26db1362984eddcdff9d6ed3d38&o=&s=1024x" onclick="goTo(2,2)">
-          <img class="g-thumb" src="https://pix8.agoda.net/property/37399930/619023655/1bca21e4edaebe688b4d6cab01517549.jpeg?ce=3&s=1024x" onclick="goTo(2,3)">
-        </div>
-      </div>
-      <div class="room-details">
-        <div class="room-top">
-          <p class="room-cat">Vue Panoramique · Mer</p>
-          <h2 class="room-name">Chambre <em>Premium Vue Mer</em></h2>
-          <p class="room-desc">Réveillez-vous face à la Méditerranée. Chambre fraîchement rénovée (2024) avec terrasse privée pour profiter des couchers de soleil et de la brise marine tunisienne.</p>
-          <div class="room-amen">
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm12-7h-8v8H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>Lit queen-size</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M3 11h18v2H3zm0-4h18v2H3zm0 8h18v2H3z"/></svg>38 m²</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>Vue mer directe</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M2 17h20v2H2z"/></svg>Terrasse privée</span>
-          </div>
-          <div class="room-pills">
-            <span class="pill">Climatisation</span>
-            <span class="pill">Minibar</span>
-            <span class="pill">Peignoir inclus</span>
-            <span class="pill">Accès terrasse rooftop</span>
-            <span class="pill green">✓ Annulation flexible</span>
-          </div>
-        </div>
-        <div class="room-divider"></div>
-        <div class="room-bottom">
-          <div class="room-incl">
-            <p>Petit-déjeuner buffet inclus</p>
-            <p>Accès terrasse Premium inclus</p>
-            <p>Plage Sidi Akkour à 2 min</p>
-          </div>
-          <div class="price-block">
-            <div class="price-old">€ 280 / nuit</div>
-            <div class="price-main"><sup>€</sup>220</div>
-            <div class="price-per">par nuit · taxes incluses</div>
-            <a href="reservation.php?chambre=superieure" class="btn-reserver">Réserver</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ─── BUNGALOW ─── -->
-    <div class="room-row" data-category="bungalow" style="animation-delay:.15s">
-      <div class="room-gallery">
-        <div class="gallery-main" id="g3">
-          <img src="https://image.resabooking.com/images/hotel/iberostar_mehari_djerba_9.jpg" class="active" alt="">
-          <img src="https://q-xx.bstatic.com/xdata/images/hotel/max500/555915040.jpg?k=3afc50360c577f0dceea900f89beefe60313ddf2467efc7d9b5ef97efdc5f8a7&o=" alt="">
-          <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/d1/20/d3/caption.jpg?w=1100&h=1100&s=1" alt="">
-          <img src="https://pix10.agoda.net/property/38835170/686418643/5b078809326ad6505dcaeef03dda4718.jpeg?ce=0&s=414x232" alt="">
-          <img src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/15854/1585464/1585464304.JPEG" alt="">
-        </div>
-        <button class="g-arrow prev" onclick="prev(4)">&#8249;</button>
-        <button class="g-arrow next" onclick="next(4)">&#8250;</button>
-        <span class="photo-count" id="c4">1 / 5</span>
-        <span class="room-badge">Nouveau 2024</span>
-        <div class="gallery-thumbs">
-          <img class="g-thumb active" src="https://image.resabooking.com/images/hotel/iberostar_mehari_djerba_9.jpg" onclick="goTo(5,0)">
-          <img class="g-thumb" src="https://q-xx.bstatic.com/xdata/images/hotel/max500/555915040.jpg?k=3afc50360c577f0dceea900f89beefe60313ddf2467efc7d9b5ef97efdc5f8a7&o=" onclick="goTo(5,1)">
-          <img class="g-thumb" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/d1/20/d3/caption.jpg?w=1100&h=1100&s=1" onclick="goTo(5,2)">
-          <img class="g-thumb" src="https://pix10.agoda.net/property/38835170/686418643/5b078809326ad6505dcaeef03dda4718.jpeg?ce=0&s=414x232" onclick="goTo(5,3)">
-          <img class="g-thumb" src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/15854/1585464/1585464304.JPEG" onclick="goTo(5,4)">
-        </div>
-      </div>
-      <div class="room-details">
-        <div class="room-top">
-          <p class="room-cat">Exclusif · Bungalow Plage</p>
-          <h2 class="room-name">Bungalow <em>Palmiers & Jardins</em></h2>
-          <p class="room-desc">Les nouveaux bungalows de 2024 sont intégrés dans la nature, entourés de palmiers et d'oliviers, avec accès direct à la plage de Sidi Akkour. Une expérience de séjour unique en harmonie avec l'environnement.</p>
-          <div class="room-amen">
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm12-7h-8v8H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>Lit king-size</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M3 11h18v2H3zm0-4h18v2H3zm0 8h18v2H3z"/></svg>50 m²</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>Vue jardins & palmiers</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M2 17h20v2H2z"/></svg>Terrasse & transats</span>
-          </div>
-          <div class="room-pills">
-            <span class="pill">Salon séparé</span>
-            <span class="pill">Accès direct plage</span>
-            <span class="pill">Machine à café</span>
-            <span class="pill">Minibar premium</span>
-            <span class="pill green">✓ Zéro plastique usage unique</span>
-          </div>
-        </div>
-        <div class="room-divider"></div>
-        <div class="room-bottom">
-          <div class="room-incl">
-            <p>Formule All-Inclusive disponible</p>
-            <p>Service de plage privatif inclus</p>
-            <p>Accès spa & hammam</p>
-          </div>
-          <div class="price-block">
-            <div class="price-old">€ 360 / nuit</div>
-            <div class="price-main"><sup>€</sup>290</div>
-            <div class="price-per">par nuit · taxes incluses</div>
-            <a href="reservation.php?chambre=deluxe" class="btn-reserver">Réserver</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ─── SUITE PRESTIGE JACUZZI ─── -->
-    <div class="room-row" data-category="suite vue-mer" style="animation-delay:.2s">
-      <div class="room-gallery">
-        <div class="gallery-main" id="g4">
-          <img src="https://www.tema.golf/wp-content/uploads/2025/01/iberostar-djerba-11.jpg" class="active" alt="">
-          <img src="https://www.destinationtunisie.info/wp-content/uploads/2024/06/chambre-hotel-iberostar-mehari-djerba.jpg" alt="">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXXPZNXwkSpH0gXo2jQxc4ns8q2Q_QxWv7IA&s" alt="">
-         
-        </div>
-        <button class="g-arrow prev" onclick="prev(3)">&#8249;</button>
-        <button class="g-arrow next" onclick="next(3)">&#8250;</button>
-        <span class="photo-count" id="c4">1 / 3</span>
-        <span class="room-badge dark">★ Prestige</span>
-        <div class="gallery-thumbs">
-          <img class="g-thumb active" src="https://www.tema.golf/wp-content/uploads/2025/01/iberostar-djerba-11.jpg" onclick="goTo(3,0)">
-          <img class="g-thumb" src="https://www.destinationtunisie.info/wp-content/uploads/2024/06/chambre-hotel-iberostar-mehari-djerba.jpg" onclick="goTo(3,1)">
-          <img class="g-thumb" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXXPZNXwkSpH0gXo2jQxc4ns8q2Q_QxWv7IA&s" onclick="goTo(3,2)">
-        </div>
-      </div>
-      <div class="room-details">
-        <div class="room-top">
-          <p class="room-cat">Suite Exclusive · Vue Mer & Jardins</p>
-          <h2 class="room-name">Suite <em>Prestige Jacuzzi Terrasse</em></h2>
-          <p class="room-desc">Suite élégante au 1er étage avec grande terrasse privée équipée d'un jacuzzi, transats et vue imprenable. L'espace idéal pour une occasion spéciale ou une escapade romantique à Djerba.</p>
-          <div class="room-amen">
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm12-7h-8v8H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>Lit king-size</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M3 11h18v2H3zm0-4h18v2H3zm0 8h18v2H3z"/></svg>65 m²</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>Vue mer & jardins</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 28h2.96z"/></svg>Jacuzzi privatif</span>
-          </div>
-          <div class="room-pills">
-            <span class="pill">Salon séparé</span>
-            <span class="pill">Jacuzzi terrasse</span>
-            <span class="pill">Peignoir & pantoufles</span>
-            <span class="pill">Room service 24h</span>
-            <span class="pill">Rooftop Premium inclus</span>
-            <span class="pill green">✓ Meilleur prix garanti</span>
-          </div>
-        </div>
-        <div class="room-divider"></div>
-        <div class="room-bottom">
-          <div class="room-incl">
-            <p>Champagne à l'arrivée offert</p>
-            <p>Accès prioritaire spa & hammam</p>
-            <p>Late check-out jusqu'à 14h</p>
-          </div>
-          <div class="price-block">
-            <div class="price-old">€ 480 / nuit</div>
-            <div class="price-main"><sup>€</sup>380</div>
-            <div class="price-per">par nuit · taxes incluses</div>
-            <a href="reservation.php?chambre=prestige" class="btn-reserver">Réserver</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ─── CHAMBRE FAMILIALE ─── -->
-    <div class="room-row" data-category="famille standard" style="animation-delay:.25s">
-      <div class="room-gallery">
-        <div class="gallery-main" id="g5">
-          <img src="https://happywaytravel.tn/public/images/image/Iberostar_Mehari_Djerba_4_0.85206800-1713960147.jpg" class="active" alt="">
-          <img src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/16029/1602957/1602957931.JPEG" alt="">
-            <img src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/16053/1605375/1605375787.JPEG" alt="">
-          </div>
-        <button class="g-arrow prev" onclick="prev(5)">&#8249;</button>
-        <button class="g-arrow next" onclick="next(5)">&#8250;</button>
-        <span class="photo-count" id="c5">1 / 3</span>
-        <span class="room-badge">Famille</span>
-        <div class="gallery-thumbs">
-          <img class="g-thumb active" src="https://happywaytravel.tn/public/images/image/Iberostar_Mehari_Djerba_4_0.85206800-1713960147.jpg" onclick="goTo(5,0)">
-          <img class="g-thumb" src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/16029/1602957/1602957931.JPEG" onclick="goTo(5,1)">
-          <img class="g-thumb" src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/16053/1605375/1605375787.JPEG" onclick="goTo(5,2)">
-        </div>
-      </div>
-      <div class="room-details">
-        <div class="room-top">
-          <p class="room-cat">Confort · Famille</p>
-          <h2 class="room-name">Chambre <em>Familiale Communicante</em></h2>
-          <p class="room-desc">Deux chambres communicantes idéales pour les familles. Les enfants ont leur espace indépendant, les parents peuvent surveiller facilement. Terrasse commune vue jardin incluse.</p>
-          <div class="room-amen">
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm12-7h-8v8H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>2 chambres</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M3 11h18v2H3zm0-4h18v2H3zm0 8h18v2H3z"/></svg>70 m²</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>Vue jardin</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9z"/></svg>4 à 6 personnes</span>
-          </div>
-          <div class="room-pills">
-            <span class="pill">Portes communicantes</span>
-            <span class="pill">Lit bébé dispo</span>
-            <span class="pill">TV dans chaque chambre</span>
-            <span class="pill">Star Camp inclus</span>
-            <span class="pill green">✓ Enfants bienvenus</span>
-          </div>
-        </div>
-        <div class="room-divider"></div>
-        <div class="room-bottom">
-          <div class="room-incl">
-            <p>Programme Star Camp enfants inclus</p>
-            <p>Piscine & Aqua-Fun pour enfants</p>
-            <p>Petit-déjeuner buffet pour tous</p>
-          </div>
-          <div class="price-block">
-            <div class="price-old">€ 390 / nuit</div>
-            <div class="price-main"><sup>€</sup>310</div>
-            <div class="price-per">par nuit · taxes incluses</div>
-            <a href="reservation.php?chambre=standard" class="btn-reserver">Réserver</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ─── JUNIOR SUITE VUE PISCINE ─── -->
-    <div class="room-row" data-category="suite" style="animation-delay:.3s">
-      <div class="room-gallery">
-        <div class="gallery-main" id="g6">
-          <img src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/16029/1602957/1602957933.JPEG" class="active" alt="">
-          <img src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/12746/1274610/1274610595.JPEG" alt="">
-          <img src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/16029/1602957/1602957929.JPEG" alt="">
-        </div>
-        <button class="g-arrow prev" onclick="prev(6)">&#8249;</button>
-        <button class="g-arrow next" onclick="next(6)">&#8250;</button>
-        <span class="photo-count" id="c6">1 / 3</span>
-        <span class="room-badge dark">Junior Suite</span>
-        <div class="gallery-thumbs">
-          <img class="g-thumb active" src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/16029/1602957/1602957933.JPEG" onclick="goTo(6,0)">
-          <img class="g-thumb" src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/12746/1274610/1274610595.JPEG" onclick="goTo(6,1)">
-          <img class="g-thumb" src="https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/16029/1602957/1602957929.JPEG" onclick="goTo(6,2)">
-        </div>
-      </div>
-      <div class="room-details">
-        <div class="room-top">
-          <p class="room-cat">Suite · Vue Piscine</p>
-          <h2 class="room-name">Junior Suite <em>Pool View</em></h2>
-          <p class="room-desc">L'une des plus grandes chambres de l'hôtel. Depuis le balcon, choisissez votre transat avant même de descendre. Baignoire îlot, salon attenant et vue directe sur la piscine principale.</p>
-          <div class="room-amen">
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm12-7h-8v8H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>Lit king-size</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M3 11h18v2H3zm0-4h18v2H3zm0 8h18v2H3z"/></svg>60 m²</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>Vue piscine directe</span>
-            <span class="amen"><svg viewBox="0 0 24 24"><path d="M2 17h20v2H2z"/></svg>Balcon spacieux</span>
-          </div>
-          <div class="room-pills">
-            <span class="pill">Salon attenant</span>
-            <span class="pill">Baignoire îlot</span>
-            <span class="pill">Nespresso machine</span>
-            <span class="pill">Accès swim-up bar</span>
-            <span class="pill">Room service</span>
-            <span class="pill green">✓ Late check-out 14h</span>
-          </div>
-        </div>
-        <div class="room-divider"></div>
-        <div class="room-bottom">
-          <div class="room-incl">
-            <p>Petit-déjeuner buffet ou en chambre</p>
-            <p>Accès spa & centre fitness</p>
-            <p>Late check-out jusqu'à 14h</p>
-          </div>
-          <div class="price-block">
-            <div class="price-old">€ 330 / nuit</div>
-            <div class="price-main"><sup>€</sup>260</div>
-            <div class="price-per">par nuit · taxes incluses</div>
-            <a href="reservation.php?chambre=deluxe" class="btn-reserver">Réserver</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /rooms list -->
-
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <div class="sidebar-card">
-      <h3 class="sidebar-title">Réserver votre <em>séjour</em></h3>
-      <p class="sidebar-sub">Réservez directement sur notre site pour les meilleurs tarifs garantis.</p>
-      <div class="sidebar-row"><span class="lbl">Check-in</span><span class="val">Dès 15h00</span></div>
-      <div class="sidebar-row"><span class="lbl">Check-out</span><span class="val">Avant 12h00</span></div>
-      <div class="sidebar-row"><span class="lbl">Langues</span><span class="val">FR · EN · AR · DE</span></div>
-      <div class="sidebar-row"><span class="lbl">Paiement</span><span class="val">CB, Visa, Mastercard</span></div>
-      <a href="reservation.html" class="btn-res-sidebar">Réserver maintenant</a>
-    </div>
-
-    <div class="sidebar-card">
-      <h3 class="sidebar-title">L'<em>hôtel</em> en chiffres</h3>
-      <div class="hotel-facts">
-        <div class="fact"><div class="fact-icon">🛏️</div><span>300 chambres & suites rénovées 2024</span></div>
-        <div class="fact"><div class="fact-icon">🌊</div><span>Accès direct plage Sidi Akkour</span></div>
-        <div class="fact"><div class="fact-icon">🌿</div><span>80 000 m² de jardins & palmiers</span></div>
-        <div class="fact"><div class="fact-icon">🏊</div><span>2 piscines + Aqua-Fun enfants</span></div>
-        <div class="fact"><div class="fact-icon">🍽️</div><span>2 restaurants + bars plage & piscine</span></div>
-        <div class="fact"><div class="fact-icon">⭐</div><span>TripAdvisor 4.5/5 · 5 800+ avis</span></div>
-      </div>
-    </div>
-  </div>
-
-</div><!-- /page-body -->
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-  <button class="lb-close" onclick="closeLb()">✕</button>
-  <button class="lb-nav prev" onclick="lbNav(-1)">&#8249;</button>
-  <img class="lightbox-img" id="lbImg" src="" alt="">
-  <button class="lb-nav next" onclick="lbNav(1)">&#8250;</button>
-  <div class="lb-count" id="lbCount"></div>
-</div>
-
-<script>
-  // ── Gallery state map ──
-  const S = {};
-
-  function initGalleries() {
-    for (let id = 1; id <= 6; id++) {
-      const imgs = document.querySelectorAll('#g' + id + ' img');
-      S[id] = { cur: 0, total: imgs.length };
-      imgs.forEach((img, i) => {
-        img.style.cursor = 'zoom-in';
-        img.addEventListener('click', () => openLb(id, i));
+  <script src="auth.js"></script>
+  <script>
+    if (window.MahariAuth) {
+      window.MahariAuth.checkAuth('login.html');
+      document.querySelectorAll('a[data-logout="true"]').forEach((link) => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          window.MahariAuth.logout('accueil.html');
+        });
       });
     }
-  }
 
-  function goTo(id, idx) {
-    const gal = document.getElementById('g' + id);
-    const imgs = gal.querySelectorAll('img');
-    const row = gal.closest('.room-row');
-    const thumbs = row.querySelectorAll('.g-thumb');
-    imgs[S[id].cur].classList.remove('active');
-    if (thumbs[S[id].cur]) thumbs[S[id].cur].classList.remove('active');
-    S[id].cur = ((idx % S[id].total) + S[id].total) % S[id].total;
-    imgs[S[id].cur].classList.add('active');
-    if (thumbs[S[id].cur]) thumbs[S[id].cur].classList.add('active');
-    const cnt = document.getElementById('c' + id);
-    if (cnt) cnt.textContent = (S[id].cur + 1) + ' / ' + S[id].total;
-  }
+    // ── Gallery state map ──
+    const S = {};
 
-  function next(id) { goTo(id, S[id].cur + 1); }
-  function prev(id) { goTo(id, S[id].cur - 1); }
+    function initGalleries() {
+      for (let id = 1; id <= 6; id++) {
+        const imgs = document.querySelectorAll('#g' + id + ' img');
+        S[id] = { cur: 0, total: imgs.length };
+        imgs.forEach((img, i) => {
+          img.style.cursor = 'zoom-in';
+          img.addEventListener('click', () => openLb(id, i));
+        });
+      }
+    }
 
-  // ── Lightbox ──
-  let lbImgs = [], lbIdx = 0;
+    function goTo(id, idx) {
+      const gal = document.getElementById('g' + id);
+      const imgs = gal.querySelectorAll('img');
+      const row = gal.closest('.room-row');
+      const thumbs = row.querySelectorAll('.g-thumb');
+      imgs[S[id].cur].classList.remove('active');
+      if (thumbs[S[id].cur]) thumbs[S[id].cur].classList.remove('active');
+      S[id].cur = ((idx % S[id].total) + S[id].total) % S[id].total;
+      imgs[S[id].cur].classList.add('active');
+      if (thumbs[S[id].cur]) thumbs[S[id].cur].classList.add('active');
+      const cnt = document.getElementById('c' + id);
+      if (cnt) cnt.textContent = (S[id].cur + 1) + ' / ' + S[id].total;
+    }
 
-  function openLb(galId, startIdx) {
-    const gal = document.getElementById('g' + galId);
-    lbImgs = Array.from(gal.querySelectorAll('img')).map(i => i.src);
-    lbIdx = startIdx;
-    updateLb();
-    document.getElementById('lightbox').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeLb() {
-    document.getElementById('lightbox').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  function lbNav(dir) { lbIdx = (lbIdx + dir + lbImgs.length) % lbImgs.length; updateLb(); }
-  function updateLb() {
-    document.getElementById('lbImg').src = lbImgs[lbIdx];
-    document.getElementById('lbCount').textContent = (lbIdx + 1) + ' / ' + lbImgs.length;
-  }
+    function next(id) { goTo(id, S[id].cur + 1); }
+    function prev(id) { goTo(id, S[id].cur - 1); }
 
-  document.getElementById('lightbox').addEventListener('click', e => { if (e.target === document.getElementById('lightbox')) closeLb(); });
-  document.addEventListener('keydown', e => {
-    if (!document.getElementById('lightbox').classList.contains('open')) return;
-    if (e.key === 'Escape') closeLb();
-    if (e.key === 'ArrowRight') lbNav(1);
-    if (e.key === 'ArrowLeft') lbNav(-1);
-  });
+    // ── Lightbox ──
+    let lbImgs = [], lbIdx = 0;
 
-  // ── Filters ──
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const f = btn.dataset.filter;
-      let n = 0;
-      document.querySelectorAll('.room-row').forEach(row => {
-        const cats = row.dataset.category || '';
-        const show = f === 'all' || cats.includes(f);
-        row.classList.toggle('hidden', !show);
-        if (show) n++;
-      });
-      document.getElementById('count').textContent = n;
+    function openLb(galId, startIdx) {
+      const gal = document.getElementById('g' + galId);
+      lbImgs = Array.from(gal.querySelectorAll('img')).map(i => i.src);
+      lbIdx = startIdx;
+      updateLb();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLb() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function lbNav(dir) { lbIdx = (lbIdx + dir + lbImgs.length) % lbImgs.length; updateLb(); }
+    function updateLb() {
+      document.getElementById('lbImg').src = lbImgs[lbIdx];
+      document.getElementById('lbCount').textContent = (lbIdx + 1) + ' / ' + lbImgs.length;
+    }
+
+    document.getElementById('lightbox').addEventListener('click', e => { if (e.target === document.getElementById('lightbox')) closeLb(); });
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape') closeLb();
+      if (e.key === 'ArrowRight') lbNav(1);
+      if (e.key === 'ArrowLeft') lbNav(-1);
     });
-  });
 
-  // ── Hero slideshow ──
-  const heroSlides = document.querySelectorAll('.hero-slide');
-  let hIdx = 0;
-  setInterval(() => {
-    heroSlides[hIdx].classList.remove('active');
-    hIdx = (hIdx + 1) % heroSlides.length;
-    heroSlides[hIdx].classList.add('active');
-  }, 4500);
+    // ── Filters ──
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        let n = 0;
+        document.querySelectorAll('.room-row').forEach(row => {
+          const cats = row.dataset.category || '';
+          const show = f === 'all' || cats.includes(f);
+          row.classList.toggle('hidden', !show);
+          if (show) n++;
+        });
+        document.getElementById('count').textContent = n;
+      });
+    });
 
-  initGalleries();
-</script>
+    // ── Hero slideshow ──
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    let hIdx = 0;
+    setInterval(() => {
+      heroSlides[hIdx].classList.remove('active');
+      hIdx = (hIdx + 1) % heroSlides.length;
+      heroSlides[hIdx].classList.add('active');
+    }, 4500);
+
+    initGalleries();
+  </script>
 </body>
+
 </html>
