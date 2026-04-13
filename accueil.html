@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mahari Hôtel — Accueil</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="accueil.css" />
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="accueil.html" class="nav-logo">
+            <div class="nav-logo-icon">M</div>
+            <div>
+                <div class="nav-logo-name">Mahari Hôtel</div>
+                <div class="nav-logo-sub">Djerba · Tunisie</div>
+            </div>
+        </a>
+        <ul class="nav-links">
+            <li class="active"><a href="accueil.html">Accueil</a></li>
+            <li data-show-logged-in><a href="reservation.html">Réservation</a></li>
+            <li data-show-logged-in><a href="carte-chambres.html">Chambres</a></li>
+            <li data-show-logged-in><a href="services.html">Services</a></li>
+            <li data-show-logged-in><a href="profil.html">Profil</a></li>
+            <li><a href="registre.html">Registre</a></li>
+            <li data-show-logged-out><a href="login.html">Connexion</a></li>
+            <li data-show-logged-in><a href="#" data-logout="true">Déconnexion</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">Ile aux sables d'or</span>
+            <h1>Bienvenue au <em>Mahari Hôtel</em><br>votre escapade à Djerba</h1>
+            <p>
+                Entre plage, jardins et expériences sur mesure, découvrez un séjour pensé pour
+                toute la famille. Réservez votre chambre, explorez nos services et gérez vos réservations facilement.
+            </p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="reservation.html">Réserver maintenant</a>
+                <a class="btn btn-ghost" href="carte-chambres.html">Voir les chambres</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="section-head">
+            <span class="tag">Expériences</span>
+            <h2>Un séjour complet, du confort au bien-être</h2>
+            <p>Une sélection de moments forts inspirés du cadre hôtelier de Djerba pour une page d’accueil élégante et
+                cohérente avec ton site.</p>
+        </section>
+
+        <section class="cards" aria-label="Aperçu des expériences">
+            <article class="card">
+                <img src="https://apiimg.iberostar.com/uploads/image/82845/crops/1:1/600/image.jpeg"
+                    alt="Bar et restaurant">
+                <div class="card-body">
+                    <h3 class="card-title">Gastronomie</h3>
+                    <p class="card-text">Savourez une cuisine locale et internationale dans une ambiance raffinée.</p>
+                    <a class="card-link" href="services.html">Découvrir les services →</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://apiimg.iberostar.com/uploads/image/87233/crops/1:1/600/image.jpeg"
+                    alt="Chambre d'hôtel">
+                <div class="card-body">
+                    <h3 class="card-title">Chambres</h3>
+                    <p class="card-text">Des chambres lumineuses et confortables adaptées à tous les types de séjour.
+                    </p>
+                    <a class="card-link" href="carte-chambres.html">Choisir une chambre →</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://apiimg.iberostar.com/uploads/image/43763/crops/1:1/600/image.jpeg"
+                    alt="Piscine et activités">
+                <div class="card-body">
+                    <h3 class="card-title">Loisirs & détente</h3>
+                    <p class="card-text">Piscine, activités familles, bien-être et moments de détente en toute sérénité.
+                    </p>
+                    <a class="card-link" href="reservation.html">Planifier votre séjour →</a>
+                </div>
+            </article>
+        </section>
+
+        <section class="auth-band" aria-label="Accès compte utilisateur">
+            <div>
+                <h3>Déjà membre ? <em>Connectez-vous.</em></h3>
+                <p>Accédez à votre espace personnel pour consulter vos informations, gérer vos réservations et profiter
+                    d’une expérience personnalisée.</p>
+            </div>
+            <div class="auth-actions">
+                <a class="btn btn-primary" href="login.html">Connexion</a>
+                <a class="btn btn-ghost" href="registre.html">Créer un compte</a>
+            </div>
+        </section>
+
+        <section class="quick-links" aria-label="Raccourcis utiles">
+            <article class="quick">
+                <h4>Mes réservations</h4>
+                <p>Suivez et mettez à jour facilement vos réservations en un seul endroit.</p>
+                <a class="card-link" href="profil.html">Accéder au profil →</a>
+            </article>
+            <article class="quick">
+                <h4>Réserver une chambre</h4>
+                <p>Consultez les disponibilités et confirmez votre séjour en quelques clics.</p>
+                <a class="card-link" href="reservation.html">Nouvelle réservation →</a>
+            </article>
+            <article class="quick">
+                <h4>Services de l’hôtel</h4>
+                <p>Explorez les options premium : restauration, loisirs, sport et bien-être.</p>
+                <a class="card-link" href="services.html">Voir tous les services →</a>
+            </article>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <strong>Mahari Hôtel</strong> © <span id="year"></span> · Tous droits réservés
+    </footer>
+
+    <script src="auth.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        document.querySelectorAll('a[data-logout="true"]').forEach((link) => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.MahariAuth.logout('accueil.html');
+            });
+        });
+    </script>
+</body>
+
+</html>
