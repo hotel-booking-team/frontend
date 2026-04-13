@@ -1,3 +1,82 @@
+<?php
+session_start();
+
+$conn = new mysqli('localhost', 'root', '', 'hotel_el_mehari');
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 1;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+    header('Content-Type: application/json');
+    
+    $action = $_POST['action'] ?? '';
+    
+    if ($action === 'get_services') {
+        $sql = "SELECT id, nom_service, type_service, prix, description, image, duree 
+                FROM services WHERE disponibilite = 'disponible'";
+        $result = $conn->query($sql);
+        echo json_encode($result->fetch_all(MYSQLI_ASSOC));
+        exit;
+    }
+    
+    if ($action === 'get_bookings') {
+        $sql = "SELECT r.*, s.nom_service, s.prix as service_price, s.image, s.duree
+                FROM reservations r
+                JOIN services s ON r.service_id = s.id
+                WHERE r.client_id = ? AND r.type_reservation = 'service' AND r.statut != 'annulee'
+                ORDER BY r.date_debut DESC";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        echo json_encode($stmt->get_result()->fetch_all(MYSQLI_ASSOC));
+        exit;
+    }
+    
+    if ($action === 'create_booking') {
+        $service_id = $_POST['service_id'];
+        $date_debut = $_POST['date_debut'];
+        $date_fin = $_POST['date_fin'];
+        $participants = $_POST['participants'];
+        $priceSql = "SELECT prix, nom_service FROM services WHERE id = ?";
+        $stmt = $conn->prepare($priceSql);
+        $stmt->bind_param("i", $service_id);
+        $stmt->execute();
+        $service = $stmt->get_result()->fetch_assoc();
+        
+        $start = new DateTime($date_debut);
+        $end = new DateTime($date_fin);
+        $hours = ($end->getTimestamp() - $start->getTimestamp()) / 3600;
+        $total = $service['prix'] * $hours * $participants;
+        
+        $sql = "INSERT INTO reservations (client_id, type_reservation, service_id, date_debut, date_fin, statut, montant_total, notes) 
+                VALUES (?, 'service', ?, ?, ?, 'confirmee', ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $notes = "Participants: " . $participants;
+        $stmt->bind_param("iissss", $user_id, $service_id, $date_debut, $date_fin, $total, $notes);
+        
+        if ($stmt->execute()) {
+            echo json_encode(['success' => true, 'id' => $stmt->insert_id, 'total' => $total]);
+        } else {
+            echo json_encode(['success' => false, 'error' => $conn->error]);
+        }
+        exit;
+    }
+    
+    if ($action === 'cancel_booking') {
+        $booking_id = $_POST['booking_id'];
+        $sql = "UPDATE reservations SET statut = 'annulee' 
+                WHERE id = ? AND client_id = ? AND type_reservation = 'service'";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ii", $booking_id, $user_id);
+        echo json_encode(['success' => $stmt->execute()]);
+        exit;
+    }
+}
+
+$isLoggedIn = isset($_SESSION['user_id']) || true;
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -17,15 +96,15 @@
             </div>
         </a>
         <ul class="nav-links">
-            <li><a href="accueil.html">Accueil</a></li>
-            <li><a href="reservation.html">Réservation</a></li>
-            <li><a href="chambres.html">Chambres</a></li>
-            <li class="active"><a href="services.html">Services</a></li>
-            <li><a href="profil.html">Profil</a></li>
+            <li><a href="accueil.php">Accueil</a></li>
+            <li><a href="reservation.php">Réservation</a></li>
+            <li><a href="chambres.php">Chambres</a></li>
+            <li class="active"><a href="services.php">Services</a></li>
+            <li><a href="profil.php">Profil</a></li>
             <?php if (!$isLoggedIn): ?>
-                <li><a href="login.html">Connexion</a></li>
+                <li><a href="login.php">Connexion</a></li>
             <?php else: ?>
-                <li><a href="logout.html">Déconnexion</a></li>
+                <li><a href="logout.php">Déconnexion</a></li>
             <?php endif; ?>
         </ul>
     </nav>
