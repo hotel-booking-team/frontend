@@ -1,19 +1,88 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahari Hôtel — Services</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="services.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mahari Hôtel — Services</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="services.css">
 </head>
+
 <body>
-    <nav class="navbar">
-        <a href="accueil.php" class="nav-logo">
-            <div class="nav-logo-icon">M</div>
-            <div>
-                <div class="nav-logo-name">Mahari Hôtel</div>
-                <div class="nav-logo-sub">Djerba · Tunisie</div>
+  <nav class="navbar">
+    <a href="accueil.html" class="nav-logo">
+      <div class="nav-logo-icon">M</div>
+      <div>
+        <div class="nav-logo-name">Mahari Hôtel</div>
+        <div class="nav-logo-sub">Djerba · Tunisie</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="accueil.html">Accueil</a></li>
+      <li><a href="reservation.html">Réservation</a></li>
+      <li><a href="carte-chambres.html">Chambres</a></li>
+      <li class="active"><a href="services.html">Services</a></li>
+      <li><a href="profil.html">Profil</a></li>
+      <li><a href="registre.html">Registre</a></li>
+      <li data-show-logged-out><a href="login.html">Connexion</a></li>
+      <li data-show-logged-in><a href="#" data-logout="true">Déconnexion</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-tag">Bien-être & Évasion</div>
+      <h1>Services & <em>excellence</em></h1>
+      <p>Réservez vos moments de détente et de plaisir gastronomique</p>
+    </div>
+  </div>
+
+  <div class="filter-sticky">
+    <div class="filter-inner">
+      <span class="filter-label">Type</span>
+      <button type="button" class="filter-btn active" data-filter="all">Tous</button>
+      <button type="button" class="filter-btn" data-filter="spa">Spa</button>
+      <button type="button" class="filter-btn" data-filter="restaurant">Restaurant</button>
+      <button type="button" class="filter-btn" data-filter="piscine">Piscine</button>
+      <button type="button" class="filter-btn" data-filter="excursion">Excursions</button>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="main-col">
+      <p class="results-label"><strong id="catalogCount">0</strong> prestation(s) disponible(s)</p>
+      <div id="services-catalog" class="services-catalog"></div>
+
+      <section class="panel bookings-panel">
+        <h2 class="section-heading">Mes réservations</h2>
+        <div id="bookings-list" class="bookings-list"></div>
+      </section>
+    </div>
+
+    <aside class="sidebar">
+      <div class="panel form-panel">
+        <h2 class="form-title">Réserver un service</h2>
+        <form id="serviceReservationForm">
+          <div class="form-group">
+            <label class="form-label" for="serviceSelect">Prestation</label>
+            <select id="serviceSelect" class="form-control" required>
+              <option value="">Choisir une prestation...</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="dateService">Date</label>
+            <input type="date" id="dateService" class="form-control" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="heureDebut">Heure début</label>
+              <input type="time" id="heureDebut" class="form-control" value="10:00" required>
             </div>
         </a>
         <ul class="nav-links">
@@ -115,15 +184,57 @@
                     <button type="submit" class="btn btn-primary btn-full">Réserver</button>
                 </form>
             </div>
-        </aside>
-    </div>
+          </div>
 
-    <footer class="site-footer">
-        <strong>Mahari Hôtel</strong> · Services de luxe · © 2026
-    </footer>
+          <div class="form-group">
+            <label class="form-label" for="participants">Nombre de personnes</label>
+            <input type="number" id="participants" class="form-control" min="1" max="20" value="1" required>
+          </div>
 
-    <div id="toast" class="toast"></div>
+          <div id="priceSummary" class="price-summary" style="display:none;">
+            <div class="price-row">
+              <span>Prestation</span>
+              <span id="summaryService">—</span>
+            </div>
+            <div class="price-row">
+              <span>Durée</span>
+              <span id="summaryDuration">—</span>
+            </div>
+            <div class="price-row">
+              <span>Participants</span>
+              <span id="summaryParticipants">—</span>
+            </div>
+            <div class="price-row price-row--total">
+              <span>Total</span>
+              <span id="summaryTotal" class="price-value">—</span>
+            </div>
+          </div>
 
-    <script src="services.js"></script>
+          <button type="submit" class="btn btn-primary btn-full">Réserver</button>
+        </form>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <strong>Mahari Hôtel</strong> · Services de luxe · © 2026
+  </footer>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="auth.js"></script>
+  <script>
+    if (window.MahariAuth) {
+      window.MahariAuth.checkAuth('login.html');
+      document.querySelectorAll('a[data-logout="true"]').forEach((link) => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          window.MahariAuth.logout('accueil.html');
+        });
+      });
+    }
+  </script>
+  <script src="services.js"></script>
 </body>
+
 </html>
