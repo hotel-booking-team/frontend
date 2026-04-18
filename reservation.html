@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mahari Hôtel — Réservation</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --gold:    #c9a84c; --gold-lt: #e8c97a; --navy:    #0f1f3d; --navy-lt: #1a3060;
-      --sand:    #f5f0e8; --text:    #1a1a2e; --muted:   #6b7280; --border:  #ddd5c5;
+      --gold: #c9a84c; --gold-lt: #e8c97a; --navy: #0f1f3d; --navy-lt: #1a3060;
+      --sand: #f5f0e8; --text: #1a1a2e; --muted: #6b7280; --border: #ddd5c5;
     }
     html, body { font-family: 'Jost', sans-serif; color: var(--text); }
     body {
@@ -21,6 +17,8 @@
       background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh; position: relative;
     }
     body::before { content: ''; position: fixed; inset: 0; background: rgba(10,20,40,.45); z-index: 0; }
+
+    /* ── Navbar ── */
     .navbar { position: fixed; top: 0; left: 0; width: 100%; height: 66px; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; background: var(--navy); box-shadow: 0 2px 10px rgba(0,0,0,.15); z-index: 1000; }
     .navbar::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-lt), var(--gold)); }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
@@ -31,31 +29,46 @@
     .nav-links li a { color: rgba(255,255,255,.78); text-decoration: none; font-size: .72rem; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; padding: 7px 13px; border-radius: 3px; transition: color .2s, background .2s; }
     .nav-links li a:hover { color: #fff; background: rgba(255,255,255,.1); }
     .nav-links li.active a { color: var(--gold-lt); background: rgba(201,168,76,.15); border: 1px solid rgba(201,168,76,.3); }
+
+    /* ── Layout ── */
     .page-wrapper { position: relative; z-index: 1; max-width: 1200px; margin: 100px auto 60px; padding: 0 40px; }
-    .page-header  { text-align: center; margin-bottom: 50px; animation: fadeUp .7s ease both; }
+    .page-header { text-align: center; margin-bottom: 50px; animation: fadeUp .7s ease both; }
     .page-tag { display: inline-block; font-size: .62rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold-lt); border: 1px solid rgba(201,168,76,.45); padding: 4px 14px; border-radius: 2px; margin-bottom: 16px; }
     .page-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: #fff; line-height: 1.2; margin-bottom: 14px; text-shadow: 0 2px 30px rgba(0,0,0,.4); }
     .page-header h1 em { font-style: italic; color: var(--gold-lt); }
+    .page-header p { color: rgba(255,255,255,.75); }
+
+    /* ── Card ── */
     .card { background: rgba(255,255,255,.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 8px; border: 1px solid rgba(255,255,255,.35); box-shadow: 0 8px 40px rgba(0,0,0,.12); padding: 40px; }
     .res-grid { display: grid; grid-template-columns: 1fr 380px; gap: 30px; align-items: start; }
+    .card-label { font-size: .62rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 6px; }
+    .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; margin-bottom: 6px; }
+    .card-title em { font-style: italic; }
+    .card-sub { color: var(--muted); font-size: .85rem; }
+
+    /* ── Form ── */
     .form-group { margin-bottom: 20px; }
     .form-group label { display: block; font-size: .68rem; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; color: var(--navy); margin-bottom: 8px; }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 13px 16px; background: rgba(255,255,255,.6); border: 1px solid var(--border); border-radius: 4px; font-family: 'Jost', sans-serif; font-size: .9rem; outline: none; }
-    .form-group input.err { border-color: #e11d48; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 13px 16px; background: rgba(255,255,255,.6); border: 1px solid var(--border); border-radius: 4px; font-family: 'Jost', sans-serif; font-size: .9rem; outline: none; transition: border-color .2s; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group input.err, .form-group select.err { border-color: #e11d48; background: rgba(225,29,72,.04); }
     .select-wrap { position: relative; }
     .select-wrap::after { content: '▾'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--gold); pointer-events: none; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .btn-reserve { width: 100%; padding: 15px; background: var(--navy); color: #fff; border: none; border-radius: 4px; font-family: 'Jost', sans-serif; font-size: .75rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; cursor: pointer; transition: background .25s; margin-top: 8px; }
-    
-  
+    .btn-reserve:hover { background: var(--navy-lt); }
+
+    /* ── Alertes ── */
     .alert { border-radius: 6px; padding: 16px 20px; font-size: .87rem; margin-bottom: 22px; display: none; }
     .alert-error   { background: rgba(225,29,72,.09); border: 1px solid rgba(225,29,72,.3); color: #9f1239; }
-    .alert-success { background: rgba(22,163,74,.1); border: 1px solid rgba(22,163,74,.35); color: #15803d; text-align: center; }
+    .alert-success { background: rgba(22,163,74,.1);  border: 1px solid rgba(22,163,74,.35); color: #15803d; text-align: center; }
 
-    .summary-room { border-radius: 6px; overflow: hidden; margin-bottom: 20px; position: relative; }
+    /* ── Récapitulatif ── */
+    .summary-room { border-radius: 6px; overflow: hidden; margin-bottom: 20px; }
     .summary-room img { width: 100%; height: 160px; object-fit: cover; }
     .summary-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,.06); font-size: .83rem; }
     .summary-row.total .value { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold); font-weight: 600; }
+
     @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
   </style>
 </head>
@@ -88,57 +101,46 @@
   </div>
 
   <div class="res-grid">
-    <div class="form-card">
+    <!-- ── Formulaire ── -->
+    <div>
       <div class="card">
         <span class="card-label">Nouvelle réservation</span>
         <h2 class="card-title">Votre <em>séjour</em></h2>
         <p class="card-sub">Remplissez le formulaire pour confirmer votre réservation.</p>
-        <div class="divider-line" style="height: 1px; background: var(--border); margin: 20px 0 28px;"></div>
+        <div style="height:1px; background:var(--border); margin:20px 0 28px;"></div>
 
-        <!-- Alertes (Gérées par JavaScript selon l'URL) -->
+        <!-- Alertes -->
         <div id="msg-success" class="alert alert-success">
           <strong>✓ Réservation confirmée !</strong><br>
-          Votre réservation a été enregistrée. Un e-mail vous sera envoyé sous peu.
+          Votre demande a été enregistrée et sera confirmée sous peu.
         </div>
         <div id="msg-error" class="alert alert-error">
-          <strong>⚠ Erreur de validation</strong><br>
-          Veuillez vérifier les informations saisies.
+          <strong>⚠ <span id="error-title">Erreur</span></strong><br>
+          <span id="error-detail">Veuillez vérifier les informations saisies.</span>
         </div>
 
-        <form id="reservationForm" method="POST" action="../Backend/reservation.php">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="prenom">Prénom</label>
-              <input type="text" id="prenom" name="prenom" placeholder="Sonia" required>
-            </div>
-            <div class="form-group">
-              <label for="nom">Nom</label>
-              <input type="text" id="nom" name="nom" placeholder="Ben Ali" required>
-            </div>
-          </div>
+        <form id="reservationForm" method="POST" action="../Backend/reservation.php" novalidate>
 
-          <div class="form-group">
-            <label for="email">Adresse e-mail</label>
-            <input type="email" id="email" name="email" placeholder="votre@email.com" required>
-          </div>
+          <!-- room_id : champ caché, rempli par JS selon le select -->
+          <input type="hidden" id="room_id" name="room_id" value="">
 
           <div class="form-group">
             <label for="chambre">Type de chambre</label>
             <div class="select-wrap">
-              <div class="form-group">
- 
-  <div class="select-wrap">
-    <select id="chambre" name="chambre" required>
-      <option value="" disabled selected>Choisir une chambre...</option>
-      <option value="standard"     data-price="120">Chambre Double Standard — 120€</option>
-      <option value="superieure"   data-price="220">Chambre Premium Vue Mer — 220€</option>
-      <option value="deluxe"       data-price="290">Bungalow Palmiers & Jardins — 290€</option>
-      <option value="prestige"     data-price="380">Suite Prestige Jacuzzi — 380€</option>
-      <option value="familiale"    data-price="310">Chambre Familiale Communicante — 310€</option>
-      <option value="junior-suite" data-price="260">Junior Suite Pool View — 260€</option>
-    </select>
-  </div>
-</div>
+              <!--
+                Les valeurs correspondent aux room_id réels de la table `rooms` :
+                  1 & 2 = Standard (120€)   |  3 & 4 = Supérieure (180€)
+                  5 & 6 = Deluxe (250€)     |  7     = Suite Présidentielle (500€)
+                On affiche le premier room_id disponible de chaque type.
+                Pour choisir la chambre exacte, passer par la page carte-chambres.html.
+              -->
+              <select id="chambre" name="chambre_type" required>
+                <option value="" disabled selected>Choisir un type de chambre…</option>
+                <option value="1"  data-price="120" data-label="Chambre Standard">Standard — 120€ / nuit</option>
+                <option value="3"  data-price="180" data-label="Chambre Supérieure">Supérieure — 180€ / nuit</option>
+                <option value="5"  data-price="250" data-label="Chambre Deluxe">Deluxe — 250€ / nuit</option>
+                <option value="7"  data-price="500" data-label="Suite Présidentielle">Suite Présidentielle — 500€ / nuit</option>
+              </select>
             </div>
           </div>
 
@@ -156,25 +158,29 @@
           <div class="form-row">
             <div class="form-group">
               <label for="adultes">Adultes</label>
-              <select name="adultes" id="adultes">
-                <option value="1">1 adulte</option>
-                <option value="2" selected>2 adultes</option>
-                <option value="3">3 adultes</option>
-              </select>
+              <div class="select-wrap">
+                <select name="adultes" id="adultes">
+                  <option value="1">1 adulte</option>
+                  <option value="2" selected>2 adultes</option>
+                  <option value="3">3 adultes</option>
+                </select>
+              </div>
             </div>
             <div class="form-group">
               <label for="enfants">Enfants</label>
-              <select name="enfants" id="enfants">
-                <option value="0" selected>Aucun</option>
-                <option value="1">1 enfant</option>
-                <option value="2">2 enfants</option>
-              </select>
+              <div class="select-wrap">
+                <select name="enfants" id="enfants">
+                  <option value="0" selected>Aucun</option>
+                  <option value="1">1 enfant</option>
+                  <option value="2">2 enfants</option>
+                </select>
+              </div>
             </div>
           </div>
 
           <div class="form-group">
             <label for="demandes">Demandes spéciales</label>
-            <textarea id="demandes" name="demandes" placeholder="Vue mer, lit bébé..."></textarea>
+            <textarea id="demandes" name="demandes" rows="3" placeholder="Vue mer, lit bébé, étage élevé…"></textarea>
           </div>
 
           <button type="submit" class="btn-reserve">Confirmer la réservation</button>
@@ -182,81 +188,142 @@
       </div>
     </div>
 
-    
-    <div class="summary-card">
+    <!-- ── Récapitulatif ── -->
+    <div>
       <div class="card">
         <span class="card-label">Récapitulatif</span>
         <h3 class="card-title" style="font-size:1.4rem; margin-bottom:18px;">Votre <em>sélection</em></h3>
         <div class="summary-room">
           <img id="summaryImg" src="https://www.maisonsdhotesentunisie.com/wp-content/uploads/2023/11/18-Djerba-Dar-Nejma.jpg" alt="Chambre">
         </div>
-        <div class="summary-row"><span class="label">Chambre</span><span class="value" id="summaryRoom">—</span></div>
-        <div class="summary-row"><span class="label">Arrivée</span><span class="value" id="summaryCheckin">—</span></div>
-        <div class="summary-row"><span class="label">Départ</span><span class="value" id="summaryCheckout">—</span></div>
-        <div class="summary-row total"><span class="label">Total</span><span class="value" id="summaryTotal">—</span></div>
+        <div class="summary-row"><span>Chambre</span><span id="summaryRoom">—</span></div>
+        <div class="summary-row"><span>Arrivée</span><span id="summaryCheckin">—</span></div>
+        <div class="summary-row"><span>Départ</span><span id="summaryCheckout">—</span></div>
+        <div class="summary-row"><span>Nuits</span><span id="summaryNights">—</span></div>
+        <div class="summary-row total"><span>Total</span><span id="summaryTotal">—</span></div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  // 1. Dates minimales
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('checkin').min = today;
-  document.getElementById('checkout').min = today;
-
-  
+  // ── Images par room_id (correspondant à la table rooms) ────────────────────
   const roomImages = {
-    'standard':     'https://pix8.agoda.net/hotelImages/5915786/-1/af95b7573207fe75c6911dba35bfa202.jpg?ca=7&ce=1&s=1024x',
-    'superieure':   'https://q-xx.bstatic.com/xdata/images/hotel/840x460/581850316.jpg?k=f99867a3cfecc843c9948f82ce69be6748d770c69a1d1dcc782f160db6a42806&o=&s=1024x',
-    'deluxe':       'https://image.resabooking.com/images/hotel/iberostar_mehari_djerba_9.jpg',
-    'prestige':     'https://www.tema.golf/wp-content/uploads/2025/01/iberostar-djerba-11.jpg',
-    'familiale':    'https://happywaytravel.tn/public/images/image/Iberostar_Mehari_Djerba_4_0.85206800-1713960147.jpg',
-    'junior-suite': 'https://iberostarmeharidjerba.tn-hotel.com/data/Photos/450x450w/16029/1602957/1602957933.JPEG'
+    '1': 'https://pix8.agoda.net/hotelImages/5915786/-1/af95b7573207fe75c6911dba35bfa202.jpg?ca=7&ce=1&s=1024x',
+    '3': 'https://q-xx.bstatic.com/xdata/images/hotel/840x460/581850316.jpg?k=f99867a3cfecc843c9948f82ce69be6748d770c69a1d1dcc782f160db6a42806&o=',
+    '5': 'https://image.resabooking.com/images/hotel/iberostar_mehari_djerba_9.jpg',
+    '7': 'https://www.tema.golf/wp-content/uploads/2025/01/iberostar-djerba-11.jpg'
+  };
+
+  // ── Messages d'erreur lisibles ─────────────────────────────────────────────
+  const errorMessages = {
+    'Champs_invalides':     { title: 'Champs invalides',         detail: 'Veuillez sélectionner une chambre et des dates valides.' },
+    'Dates_invalides':      { title: 'Dates invalides',          detail: 'Le format des dates est incorrect.' },
+    'Date_arrivee_passee':  { title: 'Date d\'arrivée invalide', detail: 'La date d\'arrivée ne peut pas être dans le passé.' },
+    'Date_depart_invalide': { title: 'Date de départ invalide',  detail: 'La date de départ doit être postérieure à la date d\'arrivée.' },
+    'Chambre_indisponible': { title: 'Chambre non disponible',   detail: 'Cette chambre est déjà réservée pour les dates choisies. Essayez d\'autres dates ou un autre type.' },
+    'Chambre_introuvable':  { title: 'Chambre introuvable',      detail: 'La chambre sélectionnée n\'existe pas.' },
+    'Erreur_serveur':       { title: 'Erreur serveur',           detail: 'Une erreur interne est survenue. Veuillez réessayer.' },
   };
 
   const chSelect = document.getElementById('chambre');
-  const ciEl = document.getElementById('checkin');
-  const coEl = document.getElementById('checkout');
+  const ciEl     = document.getElementById('checkin');
+  const coEl     = document.getElementById('checkout');
+  const roomIdEl = document.getElementById('room_id');
 
-  function updateSummary() {
-    const opt = chSelect.options[chSelect.selectedIndex];
-    
-    if (opt && opt.value) {
-      // Met à jour le texte et l'image
-      document.getElementById('summaryRoom').textContent = opt.text.split(' — ')[0];
-      document.getElementById('summaryImg').src = roomImages[opt.value];
-      
-      // Calcul du prix
-      if (ciEl.value && coEl.value) {
-        const nights = (new Date(coEl.value) - new Date(ciEl.value)) / 86400000;
-        if (nights > 0) {
-          const total = nights * opt.dataset.price;
-          document.getElementById('summaryTotal').textContent = total.toLocaleString() + ' €';
-        } else {
-          document.getElementById('summaryTotal').textContent = '—';
-        }
-      }
+  // ── Dates minimales ─────────────────────────────────────────────────────────
+  const today = new Date().toISOString().split('T')[0];
+  ciEl.min = today;
+  coEl.min = today;
+
+  ciEl.addEventListener('change', () => {
+    if (ciEl.value) {
+      const nextDay = new Date(ciEl.value);
+      nextDay.setDate(nextDay.getDate() + 1);
+      coEl.min = nextDay.toISOString().split('T')[0];
+      if (coEl.value && coEl.value <= ciEl.value) coEl.value = '';
     }
-    document.getElementById('summaryCheckin').textContent = ciEl.value || '—';
-    document.getElementById('summaryCheckout').textContent = coEl.value || '—';
-  }
-
-
-  window.addEventListener('load', () => {
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get('chambre');
-    if (code) {
-      chSelect.value = code;
-      updateSummary();
-    }
-    // Alertes
-    if (params.get('status') === 'success') document.getElementById('msg-success').style.display = 'block';
-    if (params.get('status') === 'error') document.getElementById('msg-error').style.display = 'block';
+    updateSummary();
   });
 
-  [chSelect, ciEl, coEl].forEach(el => el.addEventListener('change', updateSummary));
+  // ── Mise à jour du récapitulatif + champ caché room_id ─────────────────────
+  function updateSummary() {
+    const opt = chSelect.options[chSelect.selectedIndex];
+
+    if (opt && opt.value) {
+      roomIdEl.value = opt.value; // ← injecte le room_id dans le champ caché
+      document.getElementById('summaryRoom').textContent = opt.dataset.label || opt.text;
+      document.getElementById('summaryImg').src = roomImages[opt.value] || '';
+    } else {
+      roomIdEl.value = '';
+      document.getElementById('summaryRoom').textContent = '—';
+    }
+
+    document.getElementById('summaryCheckin').textContent  = ciEl.value  || '—';
+    document.getElementById('summaryCheckout').textContent = coEl.value  || '—';
+
+    if (opt && opt.value && ciEl.value && coEl.value) {
+      const nights = Math.round((new Date(coEl.value) - new Date(ciEl.value)) / 86400000);
+      if (nights > 0) {
+        const total = nights * Number(opt.dataset.price);
+        document.getElementById('summaryNights').textContent = nights + ' nuit' + (nights > 1 ? 's' : '');
+        document.getElementById('summaryTotal').textContent  = total.toLocaleString('fr-FR') + ' €';
+        return;
+      }
+    }
+    document.getElementById('summaryNights').textContent = '—';
+    document.getElementById('summaryTotal').textContent  = '—';
+  }
+
+  // ── Validation côté client ──────────────────────────────────────────────────
+  document.getElementById('reservationForm').addEventListener('submit', function(e) {
+    document.querySelectorAll('.err').forEach(el => el.classList.remove('err'));
+    let valid = true;
+
+    if (!chSelect.value) { chSelect.classList.add('err'); valid = false; }
+    if (!ciEl.value)      { ciEl.classList.add('err');    valid = false; }
+    if (!coEl.value || coEl.value <= ciEl.value) { coEl.classList.add('err'); valid = false; }
+
+    if (!valid) {
+      e.preventDefault();
+      showError('Champs_invalides');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+
+  function showError(code) {
+    const msg = errorMessages[code] || { title: 'Erreur', detail: 'Une erreur est survenue.' };
+    document.getElementById('error-title').textContent  = msg.title;
+    document.getElementById('error-detail').textContent = msg.detail;
+    const errEl = document.getElementById('msg-error');
+    errEl.style.display = 'block';
+    errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // ── Lecture des paramètres URL (retour PHP) ─────────────────────────────────
+  window.addEventListener('load', () => {
+    const params = new URLSearchParams(window.location.search);
+
+    // Pré-sélection depuis carte-chambres.html (?room_id=5)
+    const rid = params.get('room_id');
+    if (rid) {
+      chSelect.value = rid;
+      updateSummary();
+    }
+
+    if (params.get('status') === 'success') {
+      document.getElementById('msg-success').style.display = 'block';
+    }
+    if (params.get('status') === 'error') {
+      const message = params.get('message') || '';
+      showError(message);
+      // Re-sélectionner la chambre si indisponible
+      const roomParam = params.get('room_id');
+      if (roomParam) { chSelect.value = roomParam; updateSummary(); }
+    }
+  });
+
+  [chSelect, coEl].forEach(el => el.addEventListener('change', updateSummary));
 </script>
 </body>
-
 </html>
